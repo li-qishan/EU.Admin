@@ -80,6 +80,7 @@ Mock测试模式请运行: npm run start
    └─EU.Web                   # 服务层/表现层
    └─EU.Web.BackgroundJobs    # 服务层/表现层
    └─EU.WeixinService         # 微信接口（微信公众号、微信支付、企业微信）
+```
 
 ## 相关技术文档
 
