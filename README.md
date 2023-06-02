@@ -78,7 +78,7 @@ Mock测试模式请运行: npm run start
    ├─EU.Model                 # 实体层
    ├─EU.TaskHelper            # 任务方法类
    └─EU.Web                   # 服务层/表现层
-   └─EU.Web.BackgroundJobs    # 服务层/表现层
+   └─EU.Web.BackgroundJobs    # 任务
    └─EU.WeixinService         # 微信接口（微信公众号、微信支付、企业微信）
 ```
 
