@@ -53,6 +53,8 @@ using Google.Protobuf.WellKnownTypes;
 using EU.Web.Extensions;
 using EU.Core.Middlewares;
 using JianLian.HDIS.HttpApi.Hosting.Extensions;
+using DotNetify;
+using DotNetify.Pulse;
 
 namespace EU.Web
 {
@@ -261,6 +263,13 @@ namespace EU.Web
             services.AddMvc();
             services.AddSenparcGlobalServices(Configuration);
 
+
+            #region DotNetify
+            //services.AddSignalR();
+            //services.AddDotNetify();
+            //services.AddDotNetifyPulse();
+            #endregion
+
             _services = services;
 
         }
@@ -329,9 +338,8 @@ namespace EU.Web
 
             app.UseCors();
 
-            app.UseAuthentication();
-
-            app.UseAuthorization();
+            //使用验证和授权
+            app.UseAuthenticationAndAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -348,6 +356,12 @@ namespace EU.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            #region DotNetify
+            //app.UseWebSockets();
+            //app.UseDotNetify();
+            //app.UseDotNetifyPulse();
+            //app.UseEndpoints(endpoints => endpoints.MapHub<DotNetifyHub>("/dotnetify"));
+            #endregion
 
             #region 微信配置
             // 启动 CO2NET 全局注册，必须！
