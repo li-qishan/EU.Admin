@@ -25,7 +25,7 @@
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
-* 数据库：SQL Server2014
+* 数据库：SQL Server2014,设计文档见（EU.Web/Model）,依托于PowerDesigner进行数据库设计
 
 
 ## 内置功能(部分功能未实现)
@@ -125,6 +125,12 @@ https://sdk.weixin.senparc.com/
 - 事件总线：[默认启用 BackgroupService](https://docs.microsoft.com/zh-cn/dotnet/core/extensions/queue-service?source=recommendations)，基于[Channel](https://docs.microsoft.com/zh-cn/dotnet/api/system.threading.channels.channel-1) 实现的单机版发布订阅；可替换为 Redis 的发布订阅（可用于分布式）；也可替换为 RabbitMQ 的发布订阅（可用于分布式）
 - 定时任务：Quartz
 - 对象映射：AutoMapper
+
+## 数据库设计
+
+![image-20230602140542](./doc/images/20230602140542.png)
+![image-20230602140529](./doc/images/20230602140529.png)
+![image-20230602140537](./doc/images/20230602140537.png)
 
 ## 一些Q&A
 
