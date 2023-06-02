@@ -226,11 +226,12 @@ namespace EU.TaskHelper
                                 //new System.Threading.Thread(client.ExecOnce).Start();
                                 break;
                             }
-                        //停止采集
+                        //停止任务
                         case JobConsts.TASK_OPERATE_STOP:
                             {
                                 //client.ChangeStop();
                                 AddQuartzLog(msg.TaskCode, "收到消息，停止任务");
+                                OprateTask(JobConsts.TASK_RUN_STATE_STOP, msg.TaskId);
                                 var ResuleModel = await _schedulerCenter.PauseJob(qz);
                                 if (ResuleModel.success)
                                     AddQuartzLog(msg.TaskCode, $"{msg.TaskCode}=>暂停成功=>{ResuleModel.msg}");
@@ -244,9 +245,7 @@ namespace EU.TaskHelper
                         case JobConsts.TASK_OPERATE_ENABLE:
                             {
                                 AddQuartzLog(msg.TaskCode, "收到消息，启用任务");
-                                //client.Enable();
                                 OprateTask(JobConsts.TASK_RUN_STATE_READY, msg.TaskId);
-
                                 var ResuleModel = await _schedulerCenter.ResumeJob(qz);
                                 if (ResuleModel.success)
                                     AddQuartzLog(msg.TaskCode, $"{msg.TaskCode}=>启动成功=>{ResuleModel.msg}");
@@ -600,11 +599,17 @@ namespace EU.TaskHelper
         /// </summary>
         private static void OprateTask(string status, Guid taskId)
         {
-            //using var context = HDISContextFactory.CreateContext();
-            //var task = context.SmQuartzJob.IgnoreQueryFilters().Where(o => o.Id == taskId).FirstOrDefault();
-            //task.Status = status;
-            //context.SmQuartzJob.Update(task);
-            //context.SaveChanges();
+            using var _context = ContextFactory.CreateContext();
+            var task = _context.SmQuartzJob.Where(x => x.ID == taskId).FirstOrDefault();
+            if (task != null)
+            {
+                task.Status = status;
+                _context.SmQuartzJob.Update(task);
+                _context.SaveChanges();
+                Logger.WriteLog("消息处理完毕，状态已修改");
+            }
+            else
+                Logger.WriteLog("任务id不存在！");
         }
         public static void EditAgrs(string cron, Guid taskId)
         {

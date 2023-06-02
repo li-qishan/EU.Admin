@@ -451,7 +451,7 @@ export default
           },
           {
             path: "/system/privilege/functionpriv",
-            name: "功能权限定义",
+            name: "功能权限",
             icon: "smile",
             component: "./system/privilege/functionpriv"
           },
@@ -484,7 +484,7 @@ export default
           },
           {
             path: "/system/privilege/role",
-            name: "系统功能角色",
+            name: "用户角色",
             icon: "userswitch",
             component: "./system/privilege/role"
           },

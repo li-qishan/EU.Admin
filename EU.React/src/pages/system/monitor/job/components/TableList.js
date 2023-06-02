@@ -83,13 +83,22 @@ class TableList extends Component {
     const JobNowExecute = (Id) => {
       me.jobExecute(Id, "START")
     }
+    const JobStop = (Id) => {
+      me.jobExecute(Id, "DISABLED")
+    }
+    const JobStart = (Id) => {
+      me.jobExecute(Id, "ENABLE")
+    }
     const ModifyJobCron = (Id) => {
       me.setState({ Id, isCronModalVisible: true });
 
     }
     const action = {
-      ReadJobCurrentLog, ModifyJobCron,
-      JobNowExecute
+      ReadJobCurrentLog,
+      ModifyJobCron,
+      JobNowExecute,
+      JobStop,
+      JobStart
     }
     //#endregion
     const htmlString = "<p>Hello, world!</p>";
