@@ -47,7 +47,6 @@ class FormPage extends Component {
         me.formRef.current.setFieldsValue(result);
 
       result = await GetRoleModule({ RoleId: Id });
-      debugger
       if (result && result.Data.length > 0) {
         var checkedModuleKeys = [];
         for (var i = 0; i < result.Data.length; i++) {
@@ -56,7 +55,6 @@ class FormPage extends Component {
         this.setState({ checkedModuleKeys: checkedModuleKeys });
       }
       result = await GetRoleFuncPriv({ RoleId: Id });
-      debugger
       if (result && result.data.length > 0) {
         this.setState({ checkedFuncPrivKeys: result.data });
       }

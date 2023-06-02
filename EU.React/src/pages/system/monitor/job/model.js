@@ -62,7 +62,6 @@ const Model = {
       return { ...state, Id: payload };
     },
     setDetailSuccess(state, { payload }) {
-      debugger
       return { ...state, detail: payload };
     },
   },

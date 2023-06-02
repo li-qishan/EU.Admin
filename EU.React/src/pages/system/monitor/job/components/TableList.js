@@ -55,7 +55,6 @@ class TableList extends Component {
     me.formRef1.current.validateFields()
       .then(async (values) => {
         message.loading('数据处理中...', 0);
-        debugger;
         let result = await request(`/api/SmQuartzJob/Operate/${Id}/ARGS`, {
           params: { args: values.args },
           method: 'GET'

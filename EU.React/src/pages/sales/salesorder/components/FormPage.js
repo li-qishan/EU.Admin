@@ -51,7 +51,6 @@ class FormPage extends Component {
   }
   componentDidMount() {
     const { Id } = this.props;
-    debugger
     if (!Id)
       me.formRef.current.setFieldsValue({
         OrderCategory: 'Official',
