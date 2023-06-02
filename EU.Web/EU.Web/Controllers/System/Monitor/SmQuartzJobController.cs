@@ -133,18 +133,17 @@ namespace EU.Web.Controllers.BD
                     {
                         if (operate == "ARGS")
                         {
-                            //try
-                            //{
-                            //    Quartz.CronExpression expression = new Quartz.CronExpression(taskMsg.Args);
-                            //    if (expression == null)
-                            //    {
-                            //        return ServiceResult.OprateFailed($"表达式格式不正确!");
-                            //    }
-                            //}
-                            //catch (Exception ex)
-                            //{
-                            //    return ServiceResult.OprateFailed($"表达式格式不正确:{ex.Message}");
-                            //}
+                            try
+                            {
+                                Quartz.CronExpression expression = new Quartz.CronExpression(taskMsg.Args);
+                                if (expression == null)
+                                    return ServiceResult.OprateFailed($"表达式格式不正确!");
+
+                            }
+                            catch (Exception ex)
+                            {
+                                return ServiceResult.OprateFailed($"表达式格式不正确:{ex.Message}");
+                            }
 
                         }
                         //发送消息并直接返回操作成功

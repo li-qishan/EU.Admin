@@ -54,15 +54,39 @@ namespace EU.Model
         public string ScheduleRule { get; set; }
 
         /// <summary>
+        /// 状态
+        /// </summary>
+        [Display(Name = "Status"), Description("状态")]
+        public string Status { get; set; }
+
+        /// <summary>
         /// 上次执行时间
         /// </summary>
         [Display(Name = "LastExecuteTime"), Description("上次执行时间")]
         public DateTime? LastExecuteTime { get; set; }
 
         /// <summary>
+        /// 上次执行耗时
+        /// </summary>
+        [Display(Name = "LastCost"), Description("上次执行耗时")]
+        public int? LastCost { get; set; }
+
+        /// <summary>
+        /// 下次执行时间
+        /// </summary>
+        [Display(Name = "NextExecuteTime"), Description("下次执行时间")]
+        public DateTime? NextExecuteTime { get; set; }
+
+        /// <summary>
         /// 是否更新
         /// </summary>
         [Display(Name = "IsUpdate"), Description("是否更新")]
         public string IsUpdate { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        [Display(Name = "LastResult"), Description("")]
+        public string LastResult { get; set; }
     }
 }

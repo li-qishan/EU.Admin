@@ -22,6 +22,7 @@ class TableList extends Component {
     me = this;
     me.state = {
       isModalVisible: false,
+      isCronModalVisible: false,
       logContent: ''
     };
   }
@@ -32,7 +33,7 @@ class TableList extends Component {
       payload: { moduleCode },
     })
   }
-  async readJobCurrentLog(Id, type = "LOG.CURRENT") {
+  async jobExecute(Id, type = "LOG.CURRENT") {
     message.loading('数据处理中...', 0);
 
     let result = await request(`/api/SmQuartzJob/Operate/${Id}/${type}`, {
@@ -40,7 +41,8 @@ class TableList extends Component {
     });
     message.destroy();
     if (result.Success) {
-      me.setState({ isModalVisible: true, logContent: result.Data });
+      if (type == "LOG.CURRENT")
+        me.setState({ isModalVisible: true, logContent: result.Data });
       // me.actionRef.current.reload();
       // me.formRef1.current.resetFields();
       message.success(result.Message);
@@ -48,24 +50,49 @@ class TableList extends Component {
     else
       message.error(result.Message);
   }
+  handleCronOk() {
+    let { Id } = this.state;
+    me.formRef1.current.validateFields()
+      .then(async (values) => {
+        message.loading('数据处理中...', 0);
+        debugger;
+        let result = await request(`/api/SmQuartzJob/Operate/${Id}/ARGS`, {
+          params: { args: values.args },
+          method: 'GET'
+        });
+        if (result.Success) {
+          message.destroy();
+          me.setState({ isCronModalVisible: false });
+          me.actionRef.current.reload();
+          me.formRef1.current.resetFields();
+          message.success(result.message);
+        }
+        else
+          message.error(result.message);
+
+      });
+  }
   render() {
     let { dispatch, smjob: { moduleInfo, tableParam } } = this.props;
-    let { isModalVisible, logContent } = this.state;
+    let { isModalVisible, logContent, isCronModalVisible } = this.state;
     moduleInfo.modelName = modelName;
 
     //#region 操作栏按钮方法
     const ReadJobCurrentLog = (Id) => {
-      me.readJobCurrentLog(Id)
+      me.jobExecute(Id)
+    }
+    const JobNowExecute = (Id) => {
+      me.jobExecute(Id, "START")
+    }
+    const ModifyJobCron = (Id) => {
+      me.setState({ Id, isCronModalVisible: true });
+
     }
     const action = {
-      ReadJobCurrentLog
+      ReadJobCurrentLog, ModifyJobCron,
+      JobNowExecute
     }
-    //#endregion ‘===
-
-    // const onChange = e => {
-    //   me.setState({ version: e.target.value, version: '' })
-    //   console.log(e.target.value);
-    // };
+    //#endregion
     const htmlString = "<p>Hello, world!</p>";
     return (
       (<div>
@@ -115,6 +142,23 @@ class TableList extends Component {
           onOk={() => me.setState({ logContent: '', isModalVisible: false })}
           onCancel={() => me.setState({ logContent: '', isModalVisible: false })}>
           <div dangerouslySetInnerHTML={{ __html: logContent }} />
+        </Modal>
+        <Modal title="修改参数" open={isCronModalVisible}
+          onOk={() => me.handleCronOk()}
+          onCancel={() => me.setState({ Id: '', isCronModalVisible: false })}>
+          <Form
+            labelCol={{ span: 6, xl: 6, md: 12, sm: 12 }}
+            wrapperCol={{ span: 16 }}
+            ref={this.formRef1}
+          >
+            <Row gutter={24} justify={"center"}>
+              <Col span={24}>
+                <FormItem name="args" label="Cron表达式" rules={[{ required: true }]}>
+                  <Input placeholder="请输入" />
+                </FormItem>
+              </Col>
+            </Row>
+          </Form>
         </Modal>
       </div>)
     );

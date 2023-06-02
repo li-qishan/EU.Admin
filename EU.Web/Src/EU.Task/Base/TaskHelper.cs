@@ -9,8 +9,10 @@ using EU.Core;
 using EU.Core.Const;
 using EU.Core.Services;
 using EU.Core.Utilities;
+using EU.DataAccess;
 using EU.Model;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
 
 namespace EU.TaskHelper
 {
@@ -101,7 +103,7 @@ namespace EU.TaskHelper
                         Id = taskItem.ID,
                         Name = taskItem.JobName,
                         JobGroup = "JOB",
-                        AssemblyName = "EU.Web.BackgroundJobs",
+                        AssemblyName = "EU.TaskHelper",
                         ClassName = taskItem.ClassName,
                         Cron = taskItem.ScheduleRule,
                         TriggerType = 1
@@ -606,24 +608,23 @@ namespace EU.TaskHelper
         }
         public static void EditAgrs(string cron, Guid taskId)
         {
-            //using var context = HDISContextFactory.CreateContext();
-            //var task = context.SmQuartzJob.IgnoreQueryFilters().Where(o => o.Id == taskId).FirstOrDefault();
-            //task.Cron = cron;
-            //context.SmQuartzJob.Update(task);
-            //context.SaveChanges();
-
-            //SendLog("收到消息，修改参数");
-            //m_Cron = cron;
-            //b_editCron = true;
-            //using (var context = HDISContextFactory.CreateContext())
-            //{
-            //    var task = context.SmQuartzJob.Where(o => o.Code == m_Code).FirstOrDefault();
-            //    task.Cron = cron;
-            //    context.SmQuartzJob.Update(task);
-            //    context.SaveChanges();
-            //}
-            //SendLog("消息处理完毕，参数已修改");
+            Logger.WriteLog($"收到消息，修改参数");
+            using var _context = ContextFactory.CreateContext();
+            var task = _context.SmQuartzJob.Where(x => x.ID == taskId).FirstOrDefault();
+            if (task != null)
+            {
+                task.ScheduleRule = cron;
+                var curTime = DateTimeHelper.Now();
+                Quartz.CronExpression expression = new Quartz.CronExpression(task.ScheduleRule);
+                expression.TimeZone = TimeZoneInfo.Utc;
+                var m_NextTime = expression?.GetNextValidTimeAfter(curTime).Value.DateTime;
+                task.NextExecuteTime = m_NextTime;
+                _context.SmQuartzJob.Update(task);
+                _context.SaveChanges();
+                Logger.WriteLog("消息处理完毕，参数已修改");
+            }
+            else
+                Logger.WriteLog("任务id不存在！");
         }
-        //#endregion
     }
 }

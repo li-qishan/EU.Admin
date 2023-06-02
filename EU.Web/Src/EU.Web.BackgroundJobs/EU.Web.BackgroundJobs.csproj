@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EU.Core\EU.Core.csproj" />
+    <ProjectReference Include="..\EU.DataAccess\EU.DataAccess.csproj" />
     <ProjectReference Include="..\EU.Task\EU.TaskHelper.csproj" />
   </ItemGroup>
 

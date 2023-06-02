@@ -40,9 +40,7 @@ namespace EU.TaskHelper
             lock (TaskHelper.m_ClientQuartzs)
             {
                 if (!TaskHelper.m_ClientQuartzs.Any(o => o.m_Code == code))
-                {
                     TaskHelper.m_ClientQuartzs.Add(this);
-                }
             }
         }
 
@@ -138,58 +136,5 @@ namespace EU.TaskHelper
             Logger.WriteLog($"[{m_Name}] {msg}");
         }
         #endregion
-    }
-    public static class UtilConvert
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="thisValue"></param>
-        /// <returns></returns>
-        public static int ObjToInt(this object thisValue)
-        {
-            int reval = 0;
-            if (thisValue == null) return 0;
-            if (thisValue != DBNull.Value && int.TryParse(thisValue.ToString(), out reval))
-            {
-                return reval;
-            }
-
-            return reval;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="thisValue"></param>
-        /// <returns></returns>
-        public static string ObjToString(this object thisValue)
-        {
-            if (thisValue != null) return thisValue.ToString().Trim();
-            return "";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="thisValue"></param>
-        /// <returns></returns>
-        public static bool IsNotEmptyOrNull(this object thisValue)
-        {
-            return thisValue.ObjToString() != "" && thisValue.ObjToString() != "undefined" && thisValue.ObjToString() != "null";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="thisValue"></param>
-        /// <param name="errorValue"></param>
-        /// <returns></returns>
-        public static string ObjToString(this object thisValue, string errorValue)
-        {
-            if (thisValue != null) return thisValue.ToString().Trim();
-            return errorValue;
-        }
-
     }
 }
