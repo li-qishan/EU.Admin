@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EU.Core\EU.Core.csproj" />
+    <ProjectReference Include="..\EU.DataAccess\EU.DataAccess.csproj" />
+    <ProjectReference Include="..\EU.Model\EU.Model.csproj" />
+  </ItemGroup>
+
+</Project>

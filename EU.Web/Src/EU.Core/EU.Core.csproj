@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EFDbContext\VOLContext.cs" />
+    <Compile Remove="Module\ModuleSqlInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="HttpRestSharp\Impl\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
+    <PackageReference Include="MySql.Data" Version="8.0.26" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.18.9" />
+    <PackageReference Include="Senparc.Weixin.Work" Version="3.15.12" />
+    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EU.DataAccess\EU.DataAccess.csproj" />
+    <ProjectReference Include="..\EU.Model\EU.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Util">
+      <HintPath>..\..\Lib\Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Util.Tools.QrCode">
+      <HintPath>..\..\Lib\Util.Tools.QrCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

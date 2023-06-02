@@ -1,0 +1,9 @@
+{
+    "name": "ts",
+    "version": "base",
+    "describe": "TS插件,端口60012",
+    "keys": [
+    ],
+    "values": [
+    ]
+}

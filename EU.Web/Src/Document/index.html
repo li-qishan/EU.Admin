@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/umi.ad1bb487.css" />
+	 <style type="text/css">
+        /**
+         * Example of an initial loading indicator.
+         * It is recommended to keep this as minimal as possible to provide instant feedback
+         * while other resources are still being loaded for the first time
+         */
+        html, body {
+            height: 100%;
+            background-color: #fff;
+        }
+
+        #appLoadingIndicator {
+            top: 50%;
+            margin-top: -15px;
+            width: 32px;
+            margin: auto;
+            position: relative;
+        }
+
+.ant-spin {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum';
+    position: absolute;
+    display: none;
+    color: #1890ff;
+    text-align: center;
+    vertical-align: middle;
+    opacity: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.78,.14,.15,.86);
+    transition: -webkit-transform .3s cubic-bezier(.78,.14,.15,.86);
+    transition: transform .3s cubic-bezier(.78,.14,.15,.86);
+    transition: transform .3s cubic-bezier(.78,.14,.15,.86),-webkit-transform .3s cubic-bezier(.78,.14,.15,.86);
+}
+.ant-spin-spinning {
+    position: static;
+    display: inline-block;
+    opacity: 1;
+}
+
+.ant-spin-dot {
+    position: relative;
+    display: inline-block;
+    font-size: 40px;
+    width: 1em;
+    height: 1em;
+}
+.ant-spin-dot-spin {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-animation: antRotate 1.2s infinite linear;
+    animation: antRotate 1.2s infinite linear;
+}
+.ant-spin-dot-item {
+    position: absolute;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-color: #1890ff;
+    border-radius: 100%;
+    -webkit-transform: scale(.75);
+    transform: scale(.75);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    opacity: .3;
+    -webkit-animation: antSpinMove 1s infinite linear alternate;
+    animation: antSpinMove 1s infinite linear alternate;
+}
+.ant-spin-dot-item:nth-child(1) {
+    top: 0;
+    left: 0;
+}
+.ant-spin-dot-item:nth-child(2) {
+    top: 0;
+    right: 0;
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s;
+}
+.ant-spin-dot-item:nth-child(3) {
+    right: 0;
+    bottom: 0;
+    -webkit-animation-delay: .8s;
+    animation-delay: .8s;
+}
+.ant-spin-dot-item:nth-child(4) {
+    bottom: 0;
+    left: 0;
+    -webkit-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+}
+    </style>
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.2.3
+    </script>
+  </head>
+  <body>
+    <div id="root">
+		<div id="appLoadingIndicator"><div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>
+		</div>
+    </div>
+
+    <script src="/umi.023ecf41.js"></script>
+  </body>
+</html>

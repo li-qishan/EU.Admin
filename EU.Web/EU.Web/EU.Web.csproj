@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <UserSecretsId>e8b5c375-a778-4371-ab18-973cc3f40483</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Base\**" />
+    <Compile Remove="Controllers\BFProject\**" />
+    <Compile Remove="Controllers\Loan\**" />
+    <Content Remove="Controllers\Base\**" />
+    <Content Remove="Controllers\BFProject\**" />
+    <Content Remove="Controllers\Loan\**" />
+    <EmbeddedResource Remove="Controllers\Base\**" />
+    <EmbeddedResource Remove="Controllers\BFProject\**" />
+    <EmbeddedResource Remove="Controllers\Loan\**" />
+    <None Remove="Controllers\Base\**" />
+    <None Remove="Controllers\BFProject\**" />
+    <None Remove="Controllers\Loan\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Startup1.cs" />
+    <Compile Remove="Utility.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AgileObjects.AgileMapper" Version="1.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="7.18.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Src\EU.Common\EU.Common.csproj" />
+    <ProjectReference Include="..\Src\EU.Core\EU.Core.csproj" />
+    <ProjectReference Include="..\Src\EU.DataAccess\EU.DataAccess.csproj" />
+    <ProjectReference Include="..\Src\EU.Model\EU.Model.csproj" />
+    <ProjectReference Include="..\Src\EU.Task\EU.TaskHelper.csproj" />
+    <ProjectReference Include="..\Src\EU.WeixinService\EU.WeixinService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Util.Tools.QrCode">
+      <HintPath>..\Lib\Util.Tools.QrCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+
+</Project>
