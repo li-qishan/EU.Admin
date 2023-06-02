@@ -1,5 +1,6 @@
-## 一优开发框架(EU-Admin)
-简单设计，力求精简。
+
+<div align="center"><h1>EU-Admin</h1></div>
+<div align="center"><h3>简单设计，力求精简</h3></div>
 
 ## 前言
 
@@ -27,7 +28,7 @@
 * 数据库：SQL Server2014
 
 
-## 内置功能(部分功能海威实现)
+## 内置功能(部分功能未实现)
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
 2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
@@ -134,3 +135,5 @@ https://umijs.org/docs/introduce/introduce
 也可以加我微信
 
 ![image-1e16e3f03796e42ff34239ccdfa509a](./doc/images/1e16e3f03796e42ff34239ccdfa509a.jpg)
+
+部分内容来源与其他开源坐着，谢谢
