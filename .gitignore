@@ -26,7 +26,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-
+appsettings.json
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -342,3 +342,5 @@ healthchecksdb
 /EU.Web/Src/EU.Web.BackgroundJobs/appsettings.json
 EU.Web/EU.Web/appsettings.json
 
+EU.Web/EU.Web/appsettings.json
+EU.Web/EU.Web/appsettings.json

@@ -68,6 +68,19 @@ Mock测试模式请运行: npm run start
 
 发布打包请运行: npm run build
 
+```bash
+├─EU.React                    # 前端
+├─doc                         # 项目文档
+├─EU.Web                      # 后端
+   ├─EU.Common                # 公共方法
+   ├─EU.Core                  # 基础设施
+   ├─EU.DataAccess            # 仓储层
+   ├─EU.Model                 # 实体层
+   ├─EU.TaskHelper            # 任务方法类
+   └─EU.Web                   # 服务层/表现层
+   └─EU.Web.BackgroundJobs    # 服务层/表现层
+   └─EU.WeixinService         # 微信接口（微信公众号、微信支付、企业微信）
+
 ## 相关技术文档
 
 ### TypeScript
@@ -87,6 +100,11 @@ https://charts.ant.design/zh
 
 ### Umi Js
 https://umijs.org/docs/introduce/introduce
+
+### Senparc
+https://github.com/JeffreySu/WeiXinMPSDK
+
+https://sdk.weixin.senparc.com/
 
 感谢这些优秀的开源项目！
 
