@@ -128,7 +128,9 @@ https://umijs.org/docs/introduce/introduce
 ## 联系我
 
 如果这个项对您觉得还不错，可以和我一起努力。
+
 邮箱：xiaochanghai@foxmail.com
+
 也可以加我微信
 
 ![image-1e16e3f03796e42ff34239ccdfa509a](./doc/images/1e16e3f03796e42ff34239ccdfa509a.jpg)
