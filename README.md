@@ -143,7 +143,7 @@ https://sdk.weixin.senparc.com/
 当然，个人还是建议跟ABP框架那样再封装一层仓储，可以避免一些后续的开发运维问题（比如：系统迁移、重构等）。
 ## 贡献
 
-- 提 Issue 请到 github
+- 提 Issue 请到 gitee
 
 ## 联系我
 
