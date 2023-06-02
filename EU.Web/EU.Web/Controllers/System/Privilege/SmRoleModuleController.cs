@@ -204,35 +204,28 @@ namespace EU.Web.Controllers.System.Privilege
         }
 
         [HttpGet]
-        public IActionResult GetAllModuleList()
+        public async Task<ServiceResult<ModuleTree>> GetAllModuleList()
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
+
                 ModuleTree moduleTree = new ModuleTree();
                 moduleTree.key = "All";
                 moduleTree.title = "请选择角色模块";
 
-                List<SmModule> smModules = _context.SmModules.OrderBy(x => x.TaxisNo).ThenBy(x => x.ModuleName).Where(x => x.IsDeleted == false).ToList();
-                smModules = smModules.OrderBy(y => y.TaxisNo).ToList();
+                List<SmModule> smModules = await _context.SmModules
+                    .OrderBy(x => x.TaxisNo)
+                    .ThenBy(x => x.ModuleName)
+                    .Where(x => x.IsDeleted == false)
+                    .ToListAsync();
                 LoopToAppendChildren(smModules, moduleTree);
 
-                obj.data = moduleTree;
-
-                status = "ok";
-                message = "查询成功！";
+                return ServiceResult<ModuleTree>.OprateSuccess(moduleTree, ResponseText.QUERY_SUCCESS);
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
         }
         #endregion
 

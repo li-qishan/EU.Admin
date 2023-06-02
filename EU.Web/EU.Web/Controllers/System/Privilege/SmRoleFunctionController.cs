@@ -4,12 +4,15 @@ using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using EU.Core.CacheManager;
+using EU.Core.Const;
+using EU.Core.Entry;
 using EU.Core.Utilities;
 using EU.DataAccess;
 using EU.Domain;
 using EU.Domain.System;
 using EU.Model.System.Privilege;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using static EU.Core.Const.Consts;
 
@@ -181,39 +184,31 @@ namespace EU.Web.Controllers.System.Privilege
         #endregion
 
         #region 获取功能权限定义
-
         [HttpGet]
-        public IActionResult GetAllFuncPriv()
+        public async Task<ServiceResult<DataTree>> GetAllFuncPriv(Guid RoleId)
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
+
                 DataTree roleTree = new DataTree();
                 roleTree.key = "All";
                 roleTree.title = "请选择功能定义";
-                roleTree.children = _context.SmFunctionPrivilege.Where(x => x.IsDeleted == false).Select(y => new DataTree
-                {
-                    title = y.SmModule.ModuleName + "/" + y.FunctionName,
-                    key = y.ID.ToString().ToLower(),
-                    isLeaf = true
-                }).ToList();
-
-                obj.data = roleTree;
-
-                status = "ok";
-                message = "查询成功！";
+                roleTree.children = await _context.SmFunctionPrivilege
+                    .OrderBy(x => x.SmModule.ModuleName)
+                    .ThenBy(x => x.FunctionName)
+                    .Where(x => x.IsDeleted == false)
+                    .Select(y => new DataTree
+                    {
+                        title = y.SmModule.ModuleName + "/" + y.FunctionName,
+                        key = y.ID.ToString().ToLower(),
+                        isLeaf = true
+                    }).ToListAsync();
+                return ServiceResult<DataTree>.OprateSuccess(roleTree, ResponseText.QUERY_SUCCESS);
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
         }
         #endregion
 
@@ -279,30 +274,20 @@ namespace EU.Web.Controllers.System.Privilege
         #endregion
 
         #region 获取角色功能定义
-
-        [HttpGet]
-        public IActionResult GetRoleFuncPriv(Guid RoleId)
+        public async Task<ServiceResult> GetRoleFuncPriv(Guid RoleId)
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
-                obj.data = _context.SmRoleFunction.Where(x => x.IsDeleted == false && x.SmRoleId == RoleId && x.SmFunctionId != null)
-                    .Select(y => y.SmFunctionId).ToList();
 
-                status = "ok";
-                message = "查询成功！";
+                var ids = await _context.SmRoleFunction
+                    .Where(x => x.IsDeleted == false && x.SmRoleId == RoleId && x.SmFunctionId != null)
+                    .Select(y => y.SmFunctionId).ToListAsync();
+                return ServiceResult<List<Guid?>>.OprateSuccess(ids, ResponseText.QUERY_SUCCESS);
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
         }
         #endregion
 

@@ -3,7 +3,7 @@ import { Button, Tree, Skeleton, Input, Card, Form, Row, Col, Space, Switch, Tab
 import { connect } from 'umi';
 import TableList from './TableList';
 import Index from '../index';
-import { GetAllModuleList, GetAllFuncPriv, GetById, GetRoleModule, GetRoleFuncPriv } from '../service'
+import { GetAllModuleList, GetAllFuncPriv, Get, GetRoleModule, GetRoleFuncPriv } from '../service'
 
 const FormItem = Form.Item;
 const { TabPane } = Tabs;
@@ -42,9 +42,9 @@ class FormPage extends Component {
       //       payload: { Id },
       //   }).then((result) => {
       // alert('2')
-      var result = await GetById({ Id });
-      if (result && me.formRef.current)
-        me.formRef.current.setFieldsValue(result);
+      var result = await Get(Id);
+      if (result.Success && me.formRef.current)
+        me.formRef.current.setFieldsValue(result.Data);
 
       result = await GetRoleModule({ RoleId: Id });
       if (result && result.Data.length > 0) {
@@ -55,20 +55,20 @@ class FormPage extends Component {
         this.setState({ checkedModuleKeys: checkedModuleKeys });
       }
       result = await GetRoleFuncPriv({ RoleId: Id });
-      if (result && result.data.length > 0) {
-        this.setState({ checkedFuncPrivKeys: result.data });
+      if (result.Success && result.Data.length > 0) {
+        this.setState({ checkedFuncPrivKeys: result.Data });
       }
     }
     var response = await GetAllModuleList()
-    if (response.status == 'ok' && response.data) {
+    if (response.Success && response.Data) {
       // response.data.children.forEach(element => {
 
       // });
-      this.setState({ treeData: [response.data] })
+      this.setState({ treeData: [response.Data] })
     }
     var response = await GetAllFuncPriv()
-    if (response.status == 'ok' && response.data) {
-      this.setState({ treeFuncPrivData: [response.data] })
+    if (response.Success && response.Data) {
+      this.setState({ treeFuncPrivData: [response.Data] })
     }
   }
   onFinish(values) {
@@ -178,7 +178,7 @@ class FormPage extends Component {
   //#endregion
 
   render() {
-    const { IsView,  smrole: { functionData, checkFunction } } = this.props;
+    const { IsView, smrole: { functionData, checkFunction } } = this.props;
     const { checkedModuleKeys, panelTitle, checkedFuncPrivKeys, treeData, expandedKeys } = this.state;
     return (
       <Form

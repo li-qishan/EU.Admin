@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { SaveAddFormData, SaveEditFormData, GetRoleModule, GetById, Delete, BatchInsertRoleModule, GetModuleFunction, SaveRoleFunction, SaveRoleFuncPriv, GetRoleFuncPriv } from './service';
+import { SaveAddFormData, SaveEditFormData, GetRoleModule, Get, Delete, BatchInsertRoleModule, GetModuleFunction, SaveRoleFunction, SaveRoleFuncPriv, GetRoleFuncPriv } from './service';
 import { GetModuleInfo } from '../../../../services/common';
 
 let noAction = [];
@@ -39,8 +39,7 @@ const Model = {
             }
         },
         *getById({ payload }, { call, put }) {
-          alert('5')
-          const response = yield call(GetById, payload);
+          const response = yield call(Get, payload);
             if (response) {
                 return { response };
             }

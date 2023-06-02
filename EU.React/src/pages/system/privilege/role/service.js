@@ -18,10 +18,8 @@ export async function query(params) {
         params,
     });
 }
-export async function GetById(params) {
-    return request('/api/SmRole/GetById', {
-        params
-    });
+export async function Get(id) {
+    return request('/api/SmRole/Get/'+id);
 }
 export async function Delete(params) {
     return request('/api/SmRole/Delete', {
