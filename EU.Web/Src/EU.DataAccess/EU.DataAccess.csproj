@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EU.Core\EU.Core.csproj" />
     <ProjectReference Include="..\EU.Model\EU.Model.csproj" />
   </ItemGroup>
 
