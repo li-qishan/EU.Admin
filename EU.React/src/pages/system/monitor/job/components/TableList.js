@@ -75,7 +75,18 @@ class TableList extends Component {
     let { dispatch, smjob: { moduleInfo, tableParam } } = this.props;
     let { isModalVisible, logContent, isCronModalVisible } = this.state;
     moduleInfo.modelName = modelName;
-
+    moduleInfo.columns && moduleInfo.columns.map((item, index) => {
+      if (item.dataIndex == 'ParentId') {
+        moduleInfo.columns[index].valueEnum =  {
+          'READY': {
+            text: '执行中',
+          },
+          'DISABLED': {
+            text: '已禁用',
+          }
+        }
+      }
+    })
     //#region 操作栏按钮方法
     const ReadJobCurrentLog = (Id) => {
       me.jobExecute(Id)
