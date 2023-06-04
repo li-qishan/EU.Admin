@@ -1,5 +1,5 @@
 import { Tooltip, Tag } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined,GithubOutlined } from '@ant-design/icons';
 import React from 'react';
 import { connect } from 'umi';
 import Avatar from './AvatarDropdown';
@@ -49,6 +49,12 @@ const GlobalHeaderRight = props => {
         //   //console.log('input', value);
         // }}
       /> */}
+      <a
+          target="_blank"
+          href="https://github.com/xiaochanghai/EU.Admin"
+          rel="github"
+          className={styles.action}
+        ><GithubOutlined /></a>
       {/* <Tooltip title="使用文档">
         <a
           target="_blank"

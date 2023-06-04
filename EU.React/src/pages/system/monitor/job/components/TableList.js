@@ -76,7 +76,7 @@ class TableList extends Component {
     let { isModalVisible, logContent, isCronModalVisible } = this.state;
     moduleInfo.modelName = modelName;
     moduleInfo.columns && moduleInfo.columns.map((item, index) => {
-      if (item.dataIndex == 'ParentId') {
+      if (item.dataIndex == 'Status') {
         moduleInfo.columns[index].valueEnum =  {
           'READY': {
             text: '执行中',

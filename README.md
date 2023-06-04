@@ -14,6 +14,8 @@
 
 后期还想做一个APP 基于RN
 
+[gitee](https://gitee.com/xiaochanghai520/EU.Admin)|[github](https://github.com/xiaochanghai/EU.Admin)
+
 ## 项目概述
 
 前后端分离，使用 JWT 认证。
@@ -57,6 +59,19 @@ http://124.221.9.198:8005/
 
 管理员： Admin  密码：1
 
+## 快速开始
+
+请参考[使用手册](./doc/使用手册.md)
+
+本人本机环境：
+
+VS2022
+
+VS Code
+
+SQL Server2014
+
+node 16.13.2
  
 ## 前端开发注意事项
 
@@ -160,8 +175,4 @@ https://sdk.weixin.senparc.com/
 
 邮箱：xiaochanghai@foxmail.com
 
-也可以加我微信
-
-![image-1e16e3f03796e42ff34239ccdfa509a](./doc/images/1e16e3f03796e42ff34239ccdfa509a.jpg)
-
-部分内容来源与其他开源坐着，谢谢
+部分内容来源与其他开源作者，谢谢
