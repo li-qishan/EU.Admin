@@ -14,8 +14,7 @@
 
 后期还想做一个APP 基于RN
 
-[gitee](https://gitee.com/xiaochanghai520/EU.Admin)|[github](https://github.com/xiaochanghai/EU.Admin)
-
+[Gitee](https://gitee.com/xiaochanghai520/EU.Admin) | [iGthub](https://github.com/xiaochanghai/EU.Admin)
 ## 项目概述
 
 前后端分离，使用 JWT 认证。
