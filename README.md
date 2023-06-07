@@ -128,7 +128,9 @@ https://sdk.weixin.senparc.com/
 ## 部署
 
 前端利用Nginx部署，后端是用IIS
-（知道现在比较流行容器化部署，但是我还是很喜欢IIS,后期可以尝试使用docker部署）
+（知道现在比较流行容器化部署，但是我还是很喜欢IIS,研究中啦）
+
+请参考[Docker部署](./doc/Docker部署.md)
 
 ## 系统能力
 
