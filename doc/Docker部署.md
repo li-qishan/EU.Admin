@@ -2,12 +2,14 @@
 
 ## 前言
 使用的是VMware+Centos7安装虚拟机进行测试
+初识Docker猛如虎 一顿操作发现也没有那么难
+Docker功能很强大 以下内容为个人一点点想法
+资料来源与网络 存在错误请指正
+
 
 ## Step 1 VMware虚拟机安装Linux教程
 
-参考地址如下
-
-https://blog.csdn.net/weixin_52799373/article/details/124324077
+[安装步骤](https://blog.csdn.net/weixin_52799373/article/details/124324077)
 
 
 ## Step 2 服务器环境搭建
@@ -16,9 +18,9 @@ https://blog.csdn.net/weixin_52799373/article/details/124324077
 
 - ** [初始化服务器](./初始化服务器.md) 使用脚本 install.sh**
 
-- ** [创建开发环境](./创建开发环境.md) 使用脚本 create.sh，示例：create-hospital.sh nanchong 601 61 **
+- ** [创建开发环境](./创建开发环境.md) 使用脚本 create.sh，示例：create.sh develop 601 61 **
 
-- ** [移除开发环境](./移除开发环境.md) 使用脚本 remove.sh，示例：remove-hospital.sh nanchong **
+- ** [移除开发环境](./移除开发环境.md) 使用脚本 remove.sh，示例：remove.sh develop **
 
 - ** 开发代码更新 **
 
@@ -28,6 +30,11 @@ https://blog.csdn.net/weixin_52799373/article/details/124324077
 ::: warning
 **在开始操作前，请前往网盘下载[开发环境](https://www.aliyundrive.com/s/92DR12j4Ehk)至本地，解压后上传服务器用户目录下**
 
+![image-a0128b1d8f7229fe995f1e9e8053dd0](./doc/images/a0128b1d8f7229fe995f1e9e8053dd0.png)
+
+安装完成
+
+![image-55099678052379f388ea912ff270a45](./doc/images/55099678052379f388ea912ff270a45.png)
 
 ## 一些Q&A
 
