@@ -53,8 +53,6 @@ using Google.Protobuf.WellKnownTypes;
 using EU.Web.Extensions;
 using EU.Core.Middlewares;
 using JianLian.HDIS.HttpApi.Hosting.Extensions;
-using DotNetify;
-using DotNetify.Pulse;
 
 namespace EU.Web
 {
@@ -262,13 +260,6 @@ namespace EU.Web
             //Senparc.CO2NET È«¾Ö×¢²á£¨±ØÐë£©
             services.AddMvc();
             services.AddSenparcGlobalServices(Configuration);
-
-
-            #region DotNetify
-            //services.AddSignalR();
-            //services.AddDotNetify();
-            //services.AddDotNetifyPulse();
-            #endregion
 
             _services = services;
 
