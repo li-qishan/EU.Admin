@@ -3,12 +3,32 @@
 ## 前言
 使用的是VMware+Centos7安装虚拟机进行测试
 
-## 1 VMware虚拟机安装Linux教程
+## Step 1 VMware虚拟机安装Linux教程
 
 参考地址如下
 
 https://blog.csdn.net/weixin_52799373/article/details/124324077
 
+
+## Step 2 服务器环境搭建
+
+- ** [服务器请自行添加sudo权限和免密](./服务器添加sudo权限和免密.md) **
+
+- ** [初始化服务器](./初始化服务器.md) 使用脚本 install.sh**
+
+- ** [创建开发环境](./创建开发环境.md) 使用脚本 create.sh，示例：create-hospital.sh nanchong 601 61 **
+
+- ** [移除开发环境](./移除开发环境.md) 使用脚本 remove.sh，示例：remove-hospital.sh nanchong **
+
+- ** 开发代码更新 **
+
+  - ** 请使用dev/publish-xxx.sh脚本 **
+  - ** 然后到对应项目文件夹（nanchong）开发环境下执行docker-compose down **
+  - ** 再执行docker-compose up -d **
+::: warning
+**在开始操作前，请前往网盘下载[开发环境](https://www.aliyundrive.com/s/92DR12j4Ehk)至本地，解压后上传服务器用户目录下**
+
+```
 
 ## 一些Q&A
 
@@ -28,5 +48,6 @@ Restarting network (via systemctl): Job for network.service failed because the c
 显示ok说明重启网络成功，ip也对应查询出来了
 
 然后会发现问题解决啦
+
 
 未完待续。。。

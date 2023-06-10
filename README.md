@@ -52,6 +52,13 @@
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
+
+## 部署
+
+前端利用Nginx部署，后端是用IIS
+
+容器化部署[Docker部署](./doc/Docker部署.md)
+
 ## 在线体验
 
 http://124.221.9.198:8005/
@@ -125,13 +132,6 @@ https://sdk.weixin.senparc.com/
 
 感谢这些优秀的开源项目！
 
-## 部署
-
-前端利用Nginx部署，后端是用IIS
-（知道现在比较流行容器化部署，但是我还是很喜欢IIS,研究中啦）
-
-请参考[Docker部署](./doc/Docker部署.md)
-
 ## 系统能力
 
 - 认证：集成Cookies、JWT；默认启用 JWT
@@ -171,8 +171,6 @@ https://sdk.weixin.senparc.com/
 - 提 Issue 请到 gitee
 
 ## 联系我
-
-如果这个项对您觉得还不错，可以和我一起努力。
 
 邮箱：xiaochanghai@foxmail.com
 
