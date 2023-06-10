@@ -164,7 +164,7 @@
             this.txt_Name.Name = "txt_Name";
             this.txt_Name.Size = new System.Drawing.Size(144, 21);
             this.txt_Name.TabIndex = 6;
-            this.txt_Name.Text = "优智云";
+            this.txt_Name.Text = "玉林市第一人民医院";
             // 
             // lbl_Name
             // 
@@ -173,7 +173,7 @@
             this.lbl_Name.Name = "lbl_Name";
             this.lbl_Name.Size = new System.Drawing.Size(59, 12);
             this.lbl_Name.TabIndex = 7;
-            this.lbl_Name.Text = "平台名称:";
+            this.lbl_Name.Text = "医院名称:";
             this.lbl_Name.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btn_Ok

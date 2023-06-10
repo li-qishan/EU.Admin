@@ -147,7 +147,7 @@
             // 
             this.tsmi_Hospital.Name = "tsmi_Hospital";
             this.tsmi_Hospital.Size = new System.Drawing.Size(141, 22);
-            this.tsmi_Hospital.Text = "平台管理(&H)";
+            this.tsmi_Hospital.Text = "项目管理(&H)";
             this.tsmi_Hospital.Click += new System.EventHandler(this.tsmi_Hospital_Click);
             // 
             // Form_DevServer

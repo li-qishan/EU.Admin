@@ -1,5 +1,4 @@
-﻿using FluentFTP;
-using JianLian.HDIS.PublishHelper.Frm;
+﻿using JianLian.HDIS.PublishHelper.Frm;
 using JianLian.HDIS.PublishHelper.Src;
 using MySql.Data.MySqlClient;
 using System;
@@ -9,9 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -31,6 +28,15 @@ namespace JianLian.HDIS.PublishHelper
             Init();
         }
         Thread t_RefreshServer;
+        /// <summary>
+        /// 重要：规约要求开发环境必装dev目录下，运维测试必装root目录下
+        /// </summary>
+        private string SelectEnv = string.Empty;
+        /// <summary>
+        /// 冗余多开发环境docker地址后缀
+        /// </summary>
+        private string SelectCmdSuffix = string.Empty;
+
         private void Init()
         {
             lb_Logger.ItemHeight = 16;
@@ -121,41 +127,41 @@ namespace JianLian.HDIS.PublishHelper
 
                                 if (server != null)
                                 {
-                                    //res = Utility.GetServerStatus(server);
+                                    res = Utility.GetServerStatus(server);
                                 }
                             }
-                            //Color color = System.Drawing.SystemColors.ControlText;
-                            //if (server != null && res.Success)
-                            //{
-                            //    var mused = Math.Round(100.0 * res.MemUsed / res.MemTotal, 2);
-                            //    tssl_ServerStatus.Visible = true;
-                            //    tssl_Split3.Visible = true;
-                            //    tssl_ServerStatus.Text = $"{server.Ip}(已用): Cpu {res.Cpu}% Mem {mused}% Disk {res.Disk}%";
-                            //    //if (res.Cpu > 90 && res.Cpu < 100 && m_CpuMax != res.Cpu)
-                            //    //{
-                            //    //    m_CpuMax = res.Cpu;
-                            //    //    Utility.SendLog($"{server.Ip} Cpu使用率过高 {res.Cpu}%");
-                            //    //}
-                            //    if (mused > 90 && m_MemMax != mused)
-                            //    {
-                            //        m_MemMax = mused;
-                            //        //Utility.SendLog($"{server.Ip} 物理内存使用率过高 {mused}%");
-                            //        color = Color.Red;
-                            //    }
-                            //    if (res.Disk > 90 && m_DiskMax != res.Disk)
-                            //    {
-                            //        m_DiskMax = res.Disk;
-                            //        //Utility.SendLog($"{server.Ip} 磁盘使用率过高 {res.Disk}%");
-                            //        color = Color.Red;
-                            //    }
-                            //    tssl_ServerStatus.ForeColor = color;
-                            //}
-                            //else
-                            //{
-                            //    tssl_ServerStatus.ForeColor = color;
-                            //    tssl_ServerStatus.Visible = false;
-                            //    tssl_Split3.Visible = false;
-                            //}
+                            Color color = System.Drawing.SystemColors.ControlText;
+                            if (server != null && res.Success)
+                            {
+                                var mused = Math.Round(100.0 * res.MemUsed / res.MemTotal, 2);
+                                tssl_ServerStatus.Visible = true;
+                                tssl_Split3.Visible = true;
+                                tssl_ServerStatus.Text = $"{server.Ip}(已用): Cpu {res.Cpu}% Mem {mused}% Disk {res.Disk}%";
+                                //if (res.Cpu > 90 && res.Cpu < 100 && m_CpuMax != res.Cpu)
+                                //{
+                                //    m_CpuMax = res.Cpu;
+                                //    Utility.SendLog($"{server.Ip} Cpu使用率过高 {res.Cpu}%");
+                                //}
+                                if (mused > 90 && m_MemMax != mused)
+                                {
+                                    m_MemMax = mused;
+                                    //Utility.SendLog($"{server.Ip} 物理内存使用率过高 {mused}%");
+                                    color = Color.Red;
+                                }
+                                if (res.Disk > 90 && m_DiskMax != res.Disk)
+                                {
+                                    m_DiskMax = res.Disk;
+                                    //Utility.SendLog($"{server.Ip} 磁盘使用率过高 {res.Disk}%");
+                                    color = Color.Red;
+                                }
+                                tssl_ServerStatus.ForeColor = color;
+                            }
+                            else
+                            {
+                                tssl_ServerStatus.ForeColor = color;
+                                tssl_ServerStatus.Visible = false;
+                                tssl_Split3.Visible = false;
+                            }
                         }));
                     }
                     catch { }
@@ -239,7 +245,7 @@ namespace JianLian.HDIS.PublishHelper
                     {
                         Tag = "hospital",
                         Name = hospital.Name,
-                        Text = $"{ hospital.Name}({hospital.DefaultFort})"
+                        Text = $"{hospital.Name}({hospital.DefaultFort})"
                     });
                 });
                 treeView_Main.Nodes.Add(tnServer);
@@ -340,6 +346,8 @@ namespace JianLian.HDIS.PublishHelper
                 }
             }
         }
+
+
         private void treeView_Main_AfterSelect(object sender, TreeViewEventArgs e)
         {
             Thread t = new Thread(new ThreadStart(delegate
@@ -351,65 +359,68 @@ namespace JianLian.HDIS.PublishHelper
 
         private void RefreshDocker(TreeNode node = null)
         {
-            //try
-            //{
-            //    BeginInvoke(new EventHandler(delegate
-            //    {
-            //        if (node == null)
-            //            node = treeView_Main.SelectedNode;
+            try
+            {
+                BeginInvoke(new EventHandler(delegate
+                {
+                    if (node == null)
+                        node = treeView_Main.SelectedNode;
 
-            //        if (node?.Tag.ToString() != "hospital")
-            //        {
-            //            return;
-            //        }
+                    if (node?.Tag.ToString() != "hospital")
+                    {
+                        return;
+                    }
 
-            //        var server = Utility.m_DevServers.Where(o => o.Name == node.Parent?.Name).FirstOrDefault();
-            //        var hospital = server?.Hospitals?.Where(o => o.Name == node.Name).FirstOrDefault();
-            //        if (server is null || hospital is null)
-            //            return;
-            //        //获取docker信息
-            //        var flag = $"{server.Name} - {hospital.Name} - {hospital.DefaultFort}";
-            //        this.gb_Docker.Text = flag;
-            //        var (Success, Result) = SshHelper.ExcuteCmd(server, DockerCommand.GetDockerStatus(hospital.FileName));
-            //        listView_App.Items.Clear();
-            //        if (Success)
-            //        {
-            //            if (!string.IsNullOrEmpty(Result))
-            //            {
-            //                string[] empties = Result.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            //                for (int i = 0; i < empties.Length; ++i)
-            //                {
-            //                    string[] items = empties[i].Split(new string[] { "||" }, StringSplitOptions.None);
-            //                    ListViewItem item = new ListViewItem();
-            //                    item.SubItems[0].Text = items[0];
-            //                    for (int j = 1; j < items.Length; ++j)
-            //                        item.SubItems.Add(items[j]);
-            //                    listView_App.Items.Add(item);
-            //                }
-            //                Utility.SendLog(flag, $"刷新成功");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (SftpHelper.Exists(server, $"/home/{server.UserName}/ihdis/compose/{hospital.FileName}"))
-            //            {
-            //                if (string.IsNullOrEmpty(Result))
-            //                {
-            //                    Utility.SendLog(flag, "项目已经停止运行");
-            //                }
-            //                else
-            //                {
-            //                    Utility.SendLog(flag, Result);
-            //                }
-            //            }
-            //            else
-            //            {
-            //                Utility.SendLog(flag, $"医院不存在");
-            //            }
-            //        }
-            //    }));
-            //}
-            //catch { }
+                    var server = Utility.m_DevServers.Where(o => o.Name == node.Parent?.Name).FirstOrDefault();
+                    var hospital = server?.Hospitals?.Where(o => o.Name == node.Name).FirstOrDefault();
+                    if (server is null || hospital is null)
+                        return;
+                    //获取docker信息
+                    var flag = $"{server.Name} - {hospital.Name} - {hospital.DefaultFort}";
+                    this.gb_Docker.Text = flag;
+                    var (Success, Result) = SshHelper.ExcuteCmd(server, DockerCommand.GetDockerStatus(hospital.FileName));
+                    listView_App.Items.Clear();
+                    if (Success)
+                    {
+                        if (!string.IsNullOrEmpty(Result))
+                        {
+                            string[] empties = Result.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                            for (int i = 0; i < empties.Length; ++i)
+                            {
+                                string[] items = empties[i].Split(new string[] { "||" }, StringSplitOptions.None);
+                                ListViewItem item = new ListViewItem();
+                                item.SubItems[0].Text = items[0];
+                                for (int j = 1; j < items.Length; ++j)
+                                    item.SubItems.Add(items[j]);
+                                listView_App.Items.Add(item);
+                            }
+                            Utility.SendLog(flag, $"刷新成功");
+
+                            SelectEnv = hospital.DefaultFort == "600" ? "dev" : "root";
+                            SelectCmdSuffix = SelectEnv == "dev" ? "/compose" : string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        if (SftpHelper.Exists(server, $"/home/{server.UserName}/ihdis/compose/{hospital.FileName}"))
+                        {
+                            if (string.IsNullOrEmpty(Result))
+                            {
+                                Utility.SendLog(flag, "项目已经停止运行");
+                            }
+                            else
+                            {
+                                Utility.SendLog(flag, Result);
+                            }
+                        }
+                        else
+                        {
+                            Utility.SendLog(flag, $"医院不存在");
+                        }
+                    }
+                }));
+            }
+            catch { }
 
         }
 
@@ -538,7 +549,7 @@ namespace JianLian.HDIS.PublishHelper
                 return;
             }
             SetStatus("停止docker-compose...");
-            SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeDown(server.UserName, hospital.FileName));
+            SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeDown(server.UserName, hospital.FileName, SelectCmdSuffix));
             RefreshDocker(treeView_Main.SelectedNode);
             SetStatus("执行完毕...");
         }
@@ -550,7 +561,7 @@ namespace JianLian.HDIS.PublishHelper
                 return;
             }
             SetStatus("启动docker-compose...");
-            SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeUp(server.UserName, hospital.FileName));
+            SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeUp(server.UserName, hospital.FileName, SelectCmdSuffix));
             RefreshDocker(treeView_Main.SelectedNode);
             SetStatus("执行完毕...");
         }
@@ -624,7 +635,7 @@ namespace JianLian.HDIS.PublishHelper
                 return;
             }
             SetStatus("重启docker-compose...");
-            SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeRestart(server.UserName, hospital.FileName));
+            SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeRestart(server.UserName, hospital.FileName, SelectCmdSuffix));
             RefreshDocker(treeView_Main.SelectedNode);
             SetStatus("执行完毕...");
         }
@@ -726,7 +737,7 @@ namespace JianLian.HDIS.PublishHelper
                 t.Start();
                 SshHelper.ExcuteCmd(server, $"cd /home/{server.UserName}/ihdis/compose/{hospital.FileName};sudo docker-compose exec -T mysql mysql -uroot -hlocalhost -pjlmed#123 {db} < {remoteFile}", true);
                 Utility.SendLog("导入sql文件完毕");
-                SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeContainerRestart(server.UserName, hospital.FileName, "webapi"));
+                SshHelper.ExcuteCmd(server, DockerCommand.DockerComposeContainerRestart(server.UserName, hospital.FileName, "webapi", SelectCmdSuffix));
             }
             catch (Exception ex)
             {
@@ -960,7 +971,7 @@ namespace JianLian.HDIS.PublishHelper
             var node = treeView_Main.SelectedNode;
             if (node is null || node.Tag.ToString() != "hospital")
             {
-                MessageBox.Show("请选择平台！", "提示");
+                MessageBox.Show("请选择医院！", "提示");
                 return;
             }
 
@@ -1034,7 +1045,6 @@ namespace JianLian.HDIS.PublishHelper
 
             if (m_SelectProjects.Count <= 0)
             {
-                MessageBox.Show("请选择操作类型！", "提示");
                 return;
             }
             else
@@ -1049,18 +1059,20 @@ namespace JianLian.HDIS.PublishHelper
             #region 执行发布
             new Thread(new ThreadStart(() =>
             {
-                //if (m_SelectHospital.FileName != "produse" && Utility.LockDevFiles(m_SelectServer, $"发布[{m_SelectHospital.FileName}]"))
-                //if (m_SelectHospital.FileName != "produse")
-                //    return;
+                if (m_SelectHospital.FileName != "produse" && Utility.LockDevFiles(m_SelectServer, $"发布[{m_SelectHospital.FileName}]"))
+                {
+                    return;
+                }
                 Publish();
                 RefreshDocker(node);
-                //if (m_SelectHospital.FileName != "produse")
-                //{
-                //    Utility.RemoveDevFiles(m_SelectServer);
-                //}
+                if (m_SelectHospital.FileName != "produse")
+                {
+                    Utility.RemoveDevFiles(m_SelectServer);
+                }
             })).Start();
             #endregion
         }
+
 
         private bool Publish()
         {
@@ -1084,14 +1096,14 @@ namespace JianLian.HDIS.PublishHelper
                         || m_SelectProjects.Any(p => p == "ts"))
                 {
                     CmdHelper.ExecCmd($"cd {m_SelectHospital.SCPath}\r\n"
-                    + $"{ m_SelectHospital.SCPath.Split(':')[0].Trim()}:\r\n"
+                    + $"{m_SelectHospital.SCPath.Split(':')[0].Trim()}:\r\n"
                     + $"git pull\r\n"
                     + $"exit\r\n");
                 }
                 else
                 {
                     CmdHelper.ExecCmd($"cd {m_SelectHospital.WWWPath}\r\n"
-                    + $"{ m_SelectHospital.WWWPath.Split(':')[0].Trim()}:\r\n"
+                    + $"{m_SelectHospital.WWWPath.Split(':')[0].Trim()}:\r\n"
                     + $"git pull\r\n"
                     + $"exit\r\n");
                 }
@@ -1158,7 +1170,7 @@ namespace JianLian.HDIS.PublishHelper
                         #endregion
 
                         #region 执行pulish行指令
-                        //ProjectPublish(project);
+                        ProjectPublish(project);
                         #endregion
 
                         Utility.SetProgressBarValue(m_SelectProjects.Count, (ulong)index);
@@ -1172,23 +1184,28 @@ namespace JianLian.HDIS.PublishHelper
 
                 if (b_suc)
                 {
-                    RemoveTempUpdatePatch();
                     //重启容器(只发布web、pad不需要重启)
-                    //if (m_SelectProjects.Any(p => p == "webapi")
-                    //    || m_SelectProjects.Any(p => p == "hfs")
-                    //    || m_SelectProjects.Any(p => p == "rtm")
-                    //    || m_SelectProjects.Any(p => p == "job")
-                    //    || m_SelectProjects.Any(p => p == "iot")
-                    //    || m_SelectProjects.Any(p => p == "ts"))
-                    //{
-                    //    m_SelectProjects.Where(p => p != "web" && p != "pad").ToList().ForEach(p =>
-                    //     {
-                    //         Utility.SendLog($"正在重新启动容器 {p}", true);
-                    //         SshHelper.ExcuteCmd(m_SelectServer, DockerCommand.DockerComposeRemove(m_SelectServer.UserName, m_SelectHospital.FileName, p));
-                    //     });
+                    if (m_SelectProjects.Any(p => p == "webapi")
+                        || m_SelectProjects.Any(p => p == "hfs")
+                        || m_SelectProjects.Any(p => p == "rtm")
+                        || m_SelectProjects.Any(p => p == "job")
+                        || m_SelectProjects.Any(p => p == "iot")
+                        || m_SelectProjects.Any(p => p == "ts"))
+                    {
 
-                    //    SshHelper.ExcuteCmd(m_SelectServer, DockerCommand.DockerComposeUp(m_SelectServer.UserName, m_SelectHospital.FileName));
-                    //}
+                        m_SelectProjects.Where(p => p != "web" && p != "pad").ToList().ForEach(p =>
+                         {
+                             Utility.SendLog($"正在重新启动容器 {p}", true);
+
+                             SshHelper.ExcuteCmd(m_SelectServer, DockerCommand.DockerComposeRemove(SelectEnv == "dev"
+                                 ? m_SelectServer.UserName : SelectEnv, m_SelectHospital.FileName, p, SelectCmdSuffix));
+                             //SshHelper.ExcuteCmd(m_SelectServer, DockerCommand.DockerComposeRemove(m_SelectServer.UserName, m_SelectHospital.FileName, p));
+                         });
+
+                        SshHelper.ExcuteCmd(m_SelectServer, DockerCommand.DockerComposeUp(SelectEnv == "dev"
+                             ? m_SelectServer.UserName : SelectEnv, m_SelectHospital.FileName, SelectCmdSuffix));
+                        //SshHelper.ExcuteCmd(m_SelectServer, DockerCommand.DockerComposeUp(m_SelectServer.UserName, m_SelectHospital.FileName));
+                    }
                 }
                 else
                 {
@@ -1208,10 +1225,7 @@ namespace JianLian.HDIS.PublishHelper
                     m_InPublish = false;
                 }
             }
-            lock (m_LockPublish)
-            {
-                m_InPublish = false;
-            }
+
             Utility.SendLog("执行发布完毕", true);
             return b_suc;
         }
@@ -1233,7 +1247,7 @@ namespace JianLian.HDIS.PublishHelper
             {
                 case "webapi":
                     {
-                        cmd = $"cd {m_SelectHospital.SCPath}\\EU.Web\\\r\n{m_SelectHospital.SCPath.Split(':')[0].Trim()}:\r\ndotnet build\r\ndotnet publish -c Release -r linux-x64 --self-contained false -o .\\bin\\Release\\net5.0\\publish\r\nexit\r\n";
+                        cmd = $"cd {m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HttpApi.Hosting\\\r\n{m_SelectHospital.SCPath.Split(':')[0].Trim()}:\r\ndotnet build\r\ndotnet publish -c Release -r linux-x64 --self-contained false -o .\\bin\\Release\\net5.0\\publish\r\nexit\r\n";
                         break;
                     }
                 case "hfs":
@@ -1305,28 +1319,28 @@ namespace JianLian.HDIS.PublishHelper
                 return;
             if (project != "web" && project != "pad")
             {
-                SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}/*", true);
+                //SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}/*", true); 
+                if (SelectEnv == "dev")
+                {
+                    SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}/*", true);
+                }
+                else
+                {
+                    SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{SelectEnv}/ihdis/{project}/code/*", true);
+                }
             }
             else
             {
-                SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/*", true);
+                if (SelectEnv == "dev")
+                {
+                    SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/*", true);
+                }
+                else
+                {
+                    SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/app/www/{project}/*", true);
+                }
             }
         }
-        private void UploadTempUpdatePatch()
-        {
-            string lappOfflinepath = $"{m_SelectHospital.SCPath}\\src\\Document\\app_offline.htm";
-            string rappOfflinepath = $"/EU.Web.Core/app_offline.htm";
-            if (File.Exists(lappOfflinepath))
-                SftpHelper.UploadFile(m_SelectServer, lappOfflinepath, rappOfflinepath);
-        }
-
-        private void RemoveTempUpdatePatch()
-        {
-            string rappOfflinepath = $"/EU.Web.Core/app_offline.htm";
-            SftpHelper.Delete(m_SelectServer, rappOfflinepath);
-        }
-
-
         /// <summary>
         /// 上传文件
         /// </summary>
@@ -1342,32 +1356,40 @@ namespace JianLian.HDIS.PublishHelper
             {
                 Utility.SendLog("文件上传", $"[{project}]开始上传文件");
                 List<string> files = new List<string>();
+
+                var toRemotePath = SelectEnv == "dev"
+                    ? $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}"
+                    : $"/home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/code/{project}";
                 switch (project)
                 {
                     case "webapi":
                         {
                             //更新日志
                             string llogpath = $"{m_SelectHospital.SCPath}\\src\\Document\\Upgrade.md";
-                            string rlogpath = $"/EU.Web.Core/wwwroot/files/upgradelogs.md";
+                            //string rlogpath = $"/home/{m_SelectServer.UserName}/ihdis/compose/{m_SelectHospital.FileName}/data/hfs/wwwroot/files/upgradelogs.md";
+                            var rlogpath = string.Empty;
+                            rlogpath = SelectEnv == "dev"
+                                ? $"/home/{m_SelectServer.UserName}/ihdis/compose/{m_SelectHospital.FileName}/data/hfs/wwwroot/files/upgradelogs.md"
+                                : $"/home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/data/hfs/wwwroot/files/upgradelogs.md";
 
                             if (File.Exists(llogpath))
+                            {
                                 SftpHelper.UploadFile(m_SelectServer, llogpath, rlogpath);
-
-                            UploadTempUpdatePatch();
+                            }
 
                             //xml文件
-                            string[] fs = Directory.GetFiles($"{m_SelectHospital.SCPath}\\EU.Web\\bin\\Debug\\net5.0", "*.xml");
+                            string[] fs = Directory.GetFiles($"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HttpApi.Hosting\\bin\\Debug\\net5.0", "*.xml");
                             fs.ToList().ForEach(fname =>
                             {
                                 FileInfo file = new FileInfo(fname);
                                 files.Add(file.Name);
                             });
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\EU.Web\\bin\\Debug\\net5.0", $"/EU.Web.Core", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HttpApi.Hosting\\bin\\Debug\\net5.0", toRemotePath, files, SetProgressBar);
 
                             //发布文件
                             files.Clear();
-                            GetUploadFiles($"{m_SelectHospital.SCPath}\\EU.Web\\bin\\Release\\net5.0\\publish", $"{m_SelectHospital.SCPath}\\EU.Web\\bin\\Release\\net5.0\\publish", files);
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\EU.Web\\bin\\Release\\net5.0\\publish", $"/EU.Web.Core", files, SetProgressBar);
+                            GetUploadFiles($"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HttpApi.Hosting\\bin\\Release\\net5.0\\publish", $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HttpApi.Hosting\\bin\\Release\\net5.0\\publish", files);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HttpApi.Hosting\\bin\\Release\\net5.0\\publish", toRemotePath, files, SetProgressBar);
                             break;
                         }
                     case "hfs":
@@ -1379,12 +1401,12 @@ namespace JianLian.HDIS.PublishHelper
                                 FileInfo file = new FileInfo(fname);
                                 files.Add(file.Name);
                             });
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HFS\\bin\\Debug\\net5.0", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HFS\\bin\\Debug\\net5.0", toRemotePath, files, SetProgressBar);
 
                             //发布文件
                             files.Clear();
                             GetUploadFiles($"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HFS\\bin\\Release\\net5.0\\publish", $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HFS\\bin\\Release\\net5.0\\publish", files);
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HFS\\bin\\Release\\net5.0\\publish", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.HFS\\bin\\Release\\net5.0\\publish", toRemotePath, files, SetProgressBar);
                             break;
                         }
                     case "rtm":
@@ -1396,12 +1418,12 @@ namespace JianLian.HDIS.PublishHelper
                                 FileInfo file = new FileInfo(fname);
                                 files.Add(file.Name);
                             });
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.SignalR\\bin\\Debug\\net5.0", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.SignalR\\bin\\Debug\\net5.0", toRemotePath, files, SetProgressBar);
 
                             //发布文件
                             files.Clear();
                             GetUploadFiles($"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.SignalR\\bin\\Release\\net5.0\\publish", $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.SignalR\\bin\\Release\\net5.0\\publish", files);
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.SignalR\\bin\\Release\\net5.0\\publish", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.SignalR\\bin\\Release\\net5.0\\publish", toRemotePath, files, SetProgressBar);
                             break;
                         }
                     case "job":
@@ -1413,12 +1435,12 @@ namespace JianLian.HDIS.PublishHelper
                                 FileInfo file = new FileInfo(fname);
                                 files.Add(file.Name);
                             });
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.BackgroundJobs\\bin\\Debug\\net5.0", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.BackgroundJobs\\bin\\Debug\\net5.0", toRemotePath, files, SetProgressBar);
 
                             //发布文件
                             files.Clear();
                             GetUploadFiles($"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.BackgroundJobs\\bin\\Release\\net5.0\\publish", $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.BackgroundJobs\\bin\\Release\\net5.0\\publish", files);
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.BackgroundJobs\\bin\\Release\\net5.0\\publish", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.BackgroundJobs\\bin\\Release\\net5.0\\publish", toRemotePath, files, SetProgressBar);
                             break;
                         }
                     case "iot":
@@ -1430,12 +1452,12 @@ namespace JianLian.HDIS.PublishHelper
                                 FileInfo file = new FileInfo(fname);
                                 files.Add(file.Name);
                             });
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.IoT\\bin\\Debug\\net5.0", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.IoT\\bin\\Debug\\net5.0", toRemotePath, files, SetProgressBar);
 
                             //发布文件
                             files.Clear();
                             GetUploadFiles($"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.IoT\\bin\\Release\\net5.0\\publish", $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.IoT\\bin\\Release\\net5.0\\publish", files);
-                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.IoT\\bin\\Release\\net5.0\\publish", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{m_SelectHospital.SCPath}\\src\\Host\\JianLian.HDIS.IoT\\bin\\Release\\net5.0\\publish", toRemotePath, files, SetProgressBar);
                             break;
                         }
                     case "ts":
@@ -1448,18 +1470,21 @@ namespace JianLian.HDIS.PublishHelper
                                 FileInfo file = new FileInfo(fname);
                                 files.Add(file.Name);
                             });
-                            SftpHelper.UploadFile(m_SelectServer, $"{tspath}\\bin\\Debug\\net5.0", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{tspath}\\bin\\Debug\\net5.0", toRemotePath, files, SetProgressBar);
 
                             //发布文件
                             files.Clear();
                             GetUploadFiles($"{tspath}\\bin\\Release\\net5.0\\publish", $"{tspath}\\bin\\Release\\net5.0\\publish", files);
-                            SftpHelper.UploadFile(m_SelectServer, $"{tspath}\\bin\\Release\\net5.0\\publish", $"/home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}", files, SetProgressBar);
+                            SftpHelper.UploadFile(m_SelectServer, $"{tspath}\\bin\\Release\\net5.0\\publish", toRemotePath, files, SetProgressBar);
                             break;
                         }
                     case "pad":
                         {
                             var fname = $"{AppDomain.CurrentDomain.BaseDirectory}\\dist.zip";
-                            var rname = $"/home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/dist.zip";
+                            //var rname = $"/home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/dist.zip";
+                            var rname = SelectEnv == "dev"
+                               ? $"/home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/dist.zip"
+                               : $"/home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/app/www/{project}/dist.zip";
 
                             //文件不存在，并且目录也不存在，标识未编译
                             if (!Directory.Exists($"{m_SelectHospital.WWWPath}\\pad-h5\\dist"))
@@ -1478,46 +1503,11 @@ namespace JianLian.HDIS.PublishHelper
                         }
                     case "web":
                         {
-                            files.Clear();
-                            var fname = $"{m_SelectHospital.WWWPath}\\dist";
-                            var rname = $"/EU.React";
-                            string webIndexPath = $"{m_SelectHospital.SCPath}\\src\\Document\\index.html";
-                            GetUploadWebFiles(fname, fname, files);
-                            string jsName = files.Where(o => o.EndsWith(".js") && o.StartsWith("umi.")).FirstOrDefault();
-                            string cssName = files.Where(o => o.EndsWith(".css") && o.StartsWith("umi.")).FirstOrDefault();
-
-                            string content = string.Empty;
-                            //using (FileStream fs = new FileStream(webIndexPath, FileMode.Open))
-                            //{
-                            //    BinaryFormatter bf = new BinaryFormatter();
-                            //    //将list序列化到文件中
-                            //    content = bf.Deserialize(fs) as string;
-                            //}
-
-
-                            FileStream fs = File.OpenRead(webIndexPath);
-                            byte[] bs = new byte[5000000];
-                            while (fs.Read(bs, 0, bs.Length) > 0)   //每次读取1024个字节 ，判断结果是否大于0
-                            {
-                                content = Encoding.Default.GetString(bs); //把字节数组所有字节转为一个字符串
-                            }
-                            fs.Close();
-
-                            string text = content.ToString();
-                            string pattern = "<script src=\"/([\\s\\S]*?)\"></script>";
-                            MatchCollection matchCollection = Regex.Matches(text, pattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-                            string value = matchCollection[0].Value;
-                            value = value.Replace("<script src=\"/", null);
-                            value = value.Replace("\"></script>", null);
-                            text = text.Replace(value, jsName);
-
-                            pattern = "<link rel=\"stylesheet\" href=\"/([\\s\\S]*?)\" />";
-                            matchCollection = Regex.Matches(text, pattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-                            value = matchCollection[0].Value;
-                            value = value.Replace("<link rel=\"stylesheet\" href=\"/", null);
-                            value = value.Replace("\" />", null);
-                            text = text.Replace(value, cssName);
-                            File.WriteAllText(fname + @"\index.html", text, Encoding.Default);
+                            var fname = $"{AppDomain.CurrentDomain.BaseDirectory}\\dist.zip";
+                            //var rname = $"/home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/dist.zip";
+                            var rname = SelectEnv == "dev"
+                             ? $"/home/{m_SelectServer.UserName}/ihdis/{(m_SelectHospital.FileName == "produse" ? "produse" : $"compose/{m_SelectHospital.FileName}")}/app/www/{project}/dist.zip"
+                             : $"/home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/app/www/{project}/dist.zip";
 
                             //文件不存在，并且目录也不存在，标识未编译
                             if (!Directory.Exists($"{m_SelectHospital.WWWPath}\\dist"))
@@ -1527,18 +1517,11 @@ namespace JianLian.HDIS.PublishHelper
                             }
 
                             //执行压缩
-                            //Utility.SendLog($"{project}", "正在执行压缩");
-                            //ZipHelper.ZipFiles(fname, $"{m_SelectHospital.WWWPath}\\dist");
+                            Utility.SendLog($"{project}", "正在执行压缩");
+                            ZipHelper.ZipFiles(fname, $"{m_SelectHospital.WWWPath}\\dist");
 
-                            List<FtpListItem> serverFiles = SftpHelper.GetListing(m_SelectServer, rname);
-
-                            serverFiles.ForEach(o =>
-                            {
-                                SftpHelper.Delete(m_SelectServer, rname + @"\" + o.Name);
-                            });
-                            //files.Add(fname);
-                            SftpHelper.UploadFile(m_SelectServer, fname, rname, files, SetProgressBar);
-                            //SftpHelper.UploadFile(m_SelectServer, fname, rname, SetProgressBarSetProgressBar);
+                            files.Add(fname);
+                            SftpHelper.UploadFile(m_SelectServer, fname, rname, SetProgressBar);
                             break;
                         }
                     default:
@@ -1594,12 +1577,7 @@ namespace JianLian.HDIS.PublishHelper
             fs.ToList().ForEach(fname =>
             {
                 FileInfo file = new FileInfo(fname);
-                if (!"appsettings.json".Equals(file.Name) && fname.IndexOf("wwwroot") < 0 && fname.IndexOf("App_Data") < 0)
-                    files.Add(fname.Replace(basePath + "\\", ""));
-                else
-                {
-
-                }
+                files.Add(fname.Replace(basePath + "\\", ""));
             });
 
             string[] ds = Directory.GetDirectories(path);
@@ -1609,22 +1587,6 @@ namespace JianLian.HDIS.PublishHelper
                     GetUploadFiles(basePath, spath, files);
             });
         }
-
-        private void GetUploadWebFiles(string basePath, string path, List<string> files)
-        {
-            string[] fs = Directory.GetFiles(path);
-            fs.ToList().ForEach(fname =>
-            {
-                FileInfo file = new FileInfo(fname);
-                files.Add(fname.Replace(basePath + "\\", ""));
-            });
-            string[] ds = Directory.GetDirectories(path);
-            ds.ToList().ForEach(spath =>
-            {
-                GetUploadFiles(basePath, spath, files);
-            });
-        }
-
         /// <summary>
         /// 执行指令
         /// </summary>
@@ -1637,17 +1599,33 @@ namespace JianLian.HDIS.PublishHelper
             {
                 //SshHelper.ExcuteCmd(m_SelectServer, $"sudo rm -rf /home/{m_SelectServer.UserName}/ihdis/compose/{m_SelectHospital.FileName}/data/{project}/*;sudo cp -r /home/{m_SelectServer.UserName}/ihdis/dev/app/server/{project}/* /home/{m_SelectServer.UserName}/ihdis/compose/{m_SelectHospital.FileName}/code/{project}");
                 //SshHelper.ExcuteCmdRtm(m_SelectServer, $"cd /home/{m_SelectServer.UserName}/ihdis/dev;sudo bash publish-{project}.sh {m_SelectHospital.FileName};");
-                SshHelper.ExcuteCmdRtm(m_SelectServer, $"cd /home/{m_SelectServer.UserName}/ihdis/dev;sudo bash publish-copycode.sh {m_SelectHospital.FileName} {project};");
-            }
-            else
-            {
-                if (m_SelectHospital.FileName == "produse")
+                //SshHelper.ExcuteCmdRtm(m_SelectServer, $"cd /home/{m_SelectServer.UserName}/ihdis/dev;sudo bash publish-copycode.sh {m_SelectHospital.FileName} {project};");
+
+                if (SelectEnv == "dev")
                 {
-                    SshHelper.ExcuteCmdRtm(m_SelectServer, $"unzip -o -d /home/{m_SelectServer.UserName}/ihdis/produse/app/www/{project} /home/{m_SelectServer.UserName}/ihdis/produse/app/www/{project}/dist.zip");
+                    SshHelper.ExcuteCmdRtm(m_SelectServer, $"cd /home/{m_SelectServer.UserName}/ihdis/dev;sudo bash publish-copycode.sh {m_SelectHospital.FileName} {project};");
                 }
                 else
                 {
-                    SshHelper.ExcuteCmdRtm(m_SelectServer, $"cd /home/{m_SelectServer.UserName}/ihdis;sudo bash unzip-www.sh {m_SelectHospital.FileName} {project};");
+                    //发布测试环境代码直接发到指定目录了，不需要copy
+                }
+            }
+            else
+            {
+                if (SelectEnv == "dev")
+                {
+                    if (m_SelectHospital.FileName == "produse")
+                    {
+                        SshHelper.ExcuteCmdRtm(m_SelectServer, $"unzip -o -d /home/{m_SelectServer.UserName}/ihdis/produse/app/www/{project} /home/{m_SelectServer.UserName}/ihdis/produse/app/www/{project}/dist.zip");
+                    }
+                    else
+                    {
+                        SshHelper.ExcuteCmdRtm(m_SelectServer, $"cd /home/{m_SelectServer.UserName}/ihdis;sudo bash unzip-www.sh {m_SelectHospital.FileName} {project};");
+                    }
+                }
+                else
+                {
+                    SshHelper.ExcuteCmdRtm(m_SelectServer, $"unzip -o -d /home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/app/www/{project} /home/{SelectEnv}/ihdis/{m_SelectHospital.FileName}/app/www/{project}/dist.zip");
                 }
             }
         }
@@ -1858,7 +1836,9 @@ namespace JianLian.HDIS.PublishHelper
                     cmdlist.Add($"sudo cp -r /home/{devServer.UserName}/ihdis/compose/{hospital.FileName}/app/www/{cname}  /home/{publishServer.UserName}/ihdis/packages/{hospital.FileName}/{version}/app/www/");
 
                     //PAD-Andriod文件
-                    cmdlist.Add(CopyPadCmd(devServer, hospital, publishServer, version, $"hdis"));
+                    var cmdStr = CopyPadCmd(devServer, hospital, publishServer, version, $"hdis");
+                    if (!string.IsNullOrWhiteSpace(cmdStr))
+                        cmdlist.Add(cmdStr);
 
                     //基础数据库文件(包含TS)：安装包、升级包必有
                     cmdlist.Add($"sudo cp /home/{devServer.UserName}/ihdis/packages/tempdb/{hospital.FileName}/{version}/hdis_table.sql  /home/{publishServer.UserName}/ihdis/packages/{hospital.FileName}/{version}/conf/mysql/");
@@ -1919,18 +1899,18 @@ namespace JianLian.HDIS.PublishHelper
                         if (Utility.m_OprateLog.PackUpgrade && Utility.m_OprateLog.PackUpgradeTS)
                         {
                             //ts升级包，单独处理
-                            var tspath = AppDomain.CurrentDomain.BaseDirectory.Replace(@"backend\src\Assistant\JianLian.HDIS.PublishHelper\bin\Debug\", "") + @"adapter\JianLian.Adapter.Center";
+                            var tspath = AppDomain.CurrentDomain.BaseDirectory.Replace(@"assistant\JianLian.Assistant\JianLian.HDIS.PublishHelper\bin\Debug\", "") + @"adapter\JianLian.Adapter.Center";
 
                             Utility.SendLog(flag, $"编译项目");
                             CmdHelper.ExecCmd($"cd {tspath}\\Host\\JianLian.Adapter.Hosting\r\n"
-                            + $"{ tspath.Split(':')[0].Trim()}:\r\n"
+                            + $"{tspath.Split(':')[0].Trim()}:\r\n"
                             + $"dotnet publish  -r linux-x64 --self-contained false -o .\\bin\\Release\\net5.0\\publish\r\n"
                             + $"exit\r\n");
 
                             //编译TS组件
                             Utility.SendLog(flag, $"编译组件 {hospital}");
                             CmdHelper.ExecCmd($"cd {tspath}\\Custom\\JianLian.Adapter.{Utility.m_OprateLog.PackUpgradeTSCustom}\r\n"
-                                + $"{ tspath.Split(':')[0].Trim()}:\r\n"
+                                + $"{tspath.Split(':')[0].Trim()}:\r\n"
                                 + $"dotnet build\r\n"
                                 + $"exit\r\n");
                             //清除文件
@@ -2002,7 +1982,7 @@ namespace JianLian.HDIS.PublishHelper
                                 //下载数据库
                                 DownLoadDb(devServer, hospital, newdb);
 
-                                string allPath = $"{ hospital.SCPath}\\src\\Document\\script\\hdis.sql";
+                                string allPath = $"{hospital.SCPath}\\src\\Document\\script\\hdis.sql";
                                 // 转换编码
                                 string allText = File.ReadAllText(allPath);
 
@@ -2157,7 +2137,7 @@ namespace JianLian.HDIS.PublishHelper
             try
             {
                 Utility.SendLog("导出数据库", "共有表 " + tables.Count);
-                string fname = $"{ hospital.SCPath}\\src\\Document\\script\\hdis.sql";
+                string fname = $"{hospital.SCPath}\\src\\Document\\script\\hdis.sql";
                 if (File.Exists(fname))
                 {
                     File.Delete(fname);
@@ -2505,7 +2485,7 @@ namespace JianLian.HDIS.PublishHelper
                 {
                     Utility.SendLog(flag, $"编译项目");
                     CmdHelper.ExecCmd($"cd {tspath}\\JianLian.Adapter.Center\\Host\\JianLian.Adapter.Hosting\r\n"
-                    + $"{ tspath.Split(':')[0].Trim()}:\r\n"
+                    + $"{tspath.Split(':')[0].Trim()}:\r\n"
                     + $"dotnet publish  -r linux-x64 --self-contained false -o .\\bin\\Release\\net5.0\\publish\r\n"
                     + $"exit\r\n");
                 }
@@ -2542,7 +2522,7 @@ namespace JianLian.HDIS.PublishHelper
                         {
                             Utility.SendLog(flag, $"编译项目 {hospital}");
                             CmdHelper.ExecCmd($"cd {o}\r\n"
-                                + $"{ tspath.Split(':')[0].Trim()}:\r\n"
+                                + $"{tspath.Split(':')[0].Trim()}:\r\n"
                                 + $"dotnet build\r\n"
                                 + $"exit\r\n");
                         }

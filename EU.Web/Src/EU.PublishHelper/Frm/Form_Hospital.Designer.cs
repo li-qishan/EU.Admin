@@ -68,8 +68,7 @@
             this.ll_Sync.Size = new System.Drawing.Size(53, 12);
             this.ll_Sync.TabIndex = 1;
             this.ll_Sync.TabStop = true;
-            this.ll_Sync.Text = "平台医院";
-            this.ll_Sync.Visible = false;
+            this.ll_Sync.Text = "同步项目";
             this.ll_Sync.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_Sync_LinkClicked);
             // 
             // listView_Hospital
@@ -97,7 +96,7 @@
             // 
             // HospitalName
             // 
-            this.HospitalName.Text = "平台名称";
+            this.HospitalName.Text = "项目名称";
             this.HospitalName.Width = 175;
             // 
             // FileName
@@ -160,7 +159,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "平台配置";
+            this.Text = "项目配置";
             this.Load += new System.EventHandler(this.Form_Hospital_Load);
             this.gb_Main.ResumeLayout(false);
             this.gb_Main.PerformLayout();

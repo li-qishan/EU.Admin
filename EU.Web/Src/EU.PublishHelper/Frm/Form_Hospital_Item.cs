@@ -64,11 +64,11 @@ namespace JianLian.HDIS.PublishHelper
             }
 
             int.TryParse(this.txt_Port.Text.Trim(), out int port);
-            //if (port < 100 || port > 655)
-            //{
-            //    MessageBox.Show($"端口配置不正确，端口取值范围[100,655]！", "提示");
-            //    return;
-            //}
+            if (port < 100 || port > 655)
+            {
+                MessageBox.Show($"端口配置不正确，端口取值范围[100,655]！", "提示");
+                return;
+            }
             var server = Utility.m_DevServers.Where(o => o.Name == devName).FirstOrDefault();
             if (server is null)
                 return;

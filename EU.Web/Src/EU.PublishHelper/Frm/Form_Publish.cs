@@ -63,7 +63,7 @@ namespace JianLian.HDIS.PublishHelper
             this.cb_Git.Checked = Utility.m_OprateLog.PackGit;
             this.cb_Download.Checked = Utility.m_OprateLog.PackDownload;
 
-            var tspath = AppDomain.CurrentDomain.BaseDirectory.Replace(@"backend\src\Assistant\JianLian.HDIS.PublishHelper\bin\Debug\", "") + @"adapter\JianLian.Adapter.Center";
+            var tspath = AppDomain.CurrentDomain.BaseDirectory.Replace(@"assistant\JianLian.Assistant\JianLian.HDIS.PublishHelper\bin\Debug\", "") + @"adapter\JianLian.Adapter.Center";
             this.cmb_TS.Items.AddRange(System.IO.Directory.GetDirectories($"{tspath}\\Custom").Select(d => d.Substring(d.LastIndexOf('.') + 1)).ToArray());
             this.cmb_TS.Text = this.cmb_TS.Items[0].ToString();
 

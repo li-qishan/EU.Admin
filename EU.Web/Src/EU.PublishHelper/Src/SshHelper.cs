@@ -206,10 +206,10 @@ namespace JianLian.HDIS.PublishHelper
                                     if (!string.IsNullOrEmpty(s.Trim()))
                                         Utility.SendLog("", s);
                                 });
-                                end = str.Trim().EndsWith($"ihdis]#");
+                                end = str.Trim().EndsWith($"eucloud']#");
                             }
                         );
-                        command = $"{command};cd /home/{server.UserName}/ihdis;".Replace(";;", ";");
+                        command = $"{command};cd /home/{server.UserName};".Replace(";;", ";");
                         Utility.SendLog("执行脚本", $"{command}");
                         stream.WriteLine(command);
                         int timecout = 5 * 60;

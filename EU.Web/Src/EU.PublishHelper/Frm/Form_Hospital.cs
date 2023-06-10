@@ -22,7 +22,7 @@ namespace JianLian.HDIS.PublishHelper
 
         private void Form_Hospital_Load(object sender, EventArgs e)
         {
-            this.Text = $"平台管理 - {devName}";
+            this.Text = $"医院管理 - {devName}";
             RefreshView();
         }
 
@@ -103,15 +103,15 @@ namespace JianLian.HDIS.PublishHelper
             bool b_add = false;
             try
             {
-                bool b_dev = SftpHelper.Exists(server, $"/home/{server.UserName}/ihdis/compose");
-                var hospitals = SftpHelper.ListDirectory(server, b_dev ? $"/home/{server.UserName}/ihdis/compose" : $"/home/{server.UserName}/ihdis").Select(o => o.Name).ToList();
+                bool b_dev = SftpHelper.Exists(server, $"/home/{server.UserName}/compose");
+                var hospitals = SftpHelper.ListDirectory(server, b_dev ? $"/home/{server.UserName}/compose" : $"/home/{server.UserName}").Select(o => o.Name).ToList();
                 hospitals.ForEach(hospitalName =>
                 {
                     if (hospitalName == (b_dev ? "sample" : "tools"))
                         return;
                     if (!b_dev)
                     {
-                        if (!SftpHelper.Exists(server, $"/home/{server.UserName}/ihdis/{hospitalName}/.env"))
+                        if (!SftpHelper.Exists(server, $"/home/{server.UserName}/{hospitalName}/.env"))
                         {
                             Utility.SendLog("同步", $"发现 文件夹 {hospitalName} 不存在 .env 文件，跳过同步");
                             return;
@@ -121,7 +121,7 @@ namespace JianLian.HDIS.PublishHelper
                     var path = System.Environment.CurrentDirectory.Replace(@"\backend\src\Assistant\JianLian.HDIS.PublishHelper\bin\Debug", "");
                     //获取医院信息
                     var fname = Utility.GetTempFileName(".env");
-                    bool b_suc = SftpHelper.DownloadFile(server, b_dev ? $"/home/{server.UserName}/ihdis/compose/{hospitalName}/.env" : $"/home/{server.UserName}/ihdis/{hospitalName}/.env", fname);
+                    bool b_suc = SftpHelper.DownloadFile(server, b_dev ? $"/home/{server.UserName}/compose/{hospitalName}/.env" : $"/home/{server.UserName}/{hospitalName}/.env", fname);
                     var content = File.ReadAllText(fname);
                     var datas = content.Split(new string[] { "\r", "\n", "=" }, StringSplitOptions.RemoveEmptyEntries);
                     var hospital = new Hospital

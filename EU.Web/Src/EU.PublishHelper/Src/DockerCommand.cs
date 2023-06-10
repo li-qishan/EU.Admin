@@ -45,9 +45,9 @@ namespace JianLian.HDIS.PublishHelper
         /// <param name="userName"></param>
         /// <param name="hospital"></param>
         /// <returns></returns>
-        public static string DockerComposeDown(string userName, string hospital)
+        public static string DockerComposeDown(string userName, string hospital, string suffix  )
         {
-            return $"cd /home/{userName}/ihdis/compose/{hospital};sudo docker-compose down";
+            return $"cd /home/{userName}/ihdis{suffix}/{hospital};sudo docker-compose down";
         }
         /// <summary>
         /// docker-compose up
@@ -55,9 +55,9 @@ namespace JianLian.HDIS.PublishHelper
         /// <param name="userName"></param>
         /// <param name="hospital"></param>
         /// <returns></returns>
-        public static string DockerComposeUp(string userName, string hospital)
+        public static string DockerComposeUp(string userName, string hospital, string suffix  )
         {
-            return $"cd /home/{userName}/ihdis/compose/{hospital};sudo docker-compose up -d";
+            return $"cd /home/{userName}/ihdis{suffix}/{hospital};sudo docker-compose up -d";
         }
         /// <summary>
         /// docker-compose restart
@@ -65,9 +65,9 @@ namespace JianLian.HDIS.PublishHelper
         /// <param name="userName"></param>
         /// <param name="hospital"></param>
         /// <returns></returns>
-        public static string DockerComposeRestart(string userName, string hospital)
+        public static string DockerComposeRestart(string userName, string hospital, string suffix  )
         {
-            return $"cd /home/{userName}/ihdis/compose/{hospital};sudo docker-compose restart";
+            return $"cd /home/{userName}/ihdis{suffix}/{hospital};sudo docker-compose restart";
         }
         /// <summary>
         /// docker-compose remove
@@ -75,9 +75,9 @@ namespace JianLian.HDIS.PublishHelper
         /// <param name="userName"></param>
         /// <param name="hospital"></param>
         /// <returns></returns>
-        public static string DockerComposeRemove(string userName, string hospital, string cname)
+        public static string DockerComposeRemove(string userName, string hospital, string cname, string suffix  )
         {
-            return $"cd /home/{userName}/ihdis/compose/{hospital};sudo docker-compose stop {cname};sudo docker-compose rm -f {cname}";
+            return $"cd /home/{userName}/ihdis{suffix}/{hospital};sudo docker-compose stop {cname};sudo docker-compose rm -f {cname}";
         }
         /// <summary>
         /// docker container restart
@@ -94,18 +94,18 @@ namespace JianLian.HDIS.PublishHelper
         /// <param name="userName"></param>
         /// <param name="hospital"></param>
         /// <returns></returns>
-        public static string DockerComposeContainerRestart(string userName, string hospital, string container)
+        public static string DockerComposeContainerRestart(string userName, string hospital, string container, string suffix  )
         {
-            return $"cd /home/{userName}/ihdis/compose/{hospital};sudo docker-compose restart {container}";
+            return $"cd /home/{userName}/ihdis{suffix}/{hospital};sudo docker-compose restart {container}";
         }
         /// <summary>
         /// docker container log
         /// </summary>
         /// <param name="containerId"></param>
         /// <returns></returns>
-        public static string DockeContainerLog(string userName, string hospital, string container)
+        public static string DockeContainerLog(string userName, string hospital, string container, string suffix )
         {
-            return $"cd /home/{userName}/ihdis/compose/{hospital};sudo docker-compose logs {container}";
+            return $"cd /home/{userName}/ihdis{suffix}/{hospital};sudo docker-compose logs {container}";
         }
     }
 }
