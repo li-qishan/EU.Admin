@@ -28,13 +28,13 @@ https://blog.csdn.net/weixin_52799373/article/details/124324077
 ::: warning
 **在开始操作前，请前往网盘下载[开发环境](https://www.aliyundrive.com/s/92DR12j4Ehk)至本地，解压后上传服务器用户目录下**
 
-```
 
 ## 一些Q&A
 
 #### Windows系统重启后，发现虚拟机上不了网？
 
 答：执行service network restart命令后出现下面的错误
+
 ```bash
 Restarting network (via systemctl): Job for network.service failed because the control process exited with error code.
 
