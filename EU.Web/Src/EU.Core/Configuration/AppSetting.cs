@@ -18,6 +18,10 @@ namespace EU.Core.Configuration
         {
             get { return _connection.DbConnectionString; }
         }
+        public static string DBType
+        {
+            get { return _connection.DBType; }
+        }
 
         public static string RedisConnectionString
         {
@@ -89,7 +93,7 @@ namespace EU.Core.Configuration
 
             #region 初始化数据库
             _connection = provider.GetRequiredService<IOptions<ConnectionStrings>>().Value;
-            DBType.Name = _connection.DBType;
+            Const.DBType.Name = _connection.DBType;
             if (string.IsNullOrEmpty(_connection.DbConnectionString))
                 throw new System.Exception("未配置好数据库默认连接");
 
