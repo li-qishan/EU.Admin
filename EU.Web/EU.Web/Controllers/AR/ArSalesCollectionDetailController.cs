@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.AR
     /// 销售收款单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArSalesCollectionDetailController : BaseController<ArSalesCollectionDetail>
+    public class ArSalesCollectionDetailController : BaseController1<ArSalesCollectionDetail>
     {
         /// <summary>
         /// 销售收款单明细

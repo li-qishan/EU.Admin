@@ -14,7 +14,7 @@ namespace EU.Web.Controllers.PD
     /// 生产工单-工模治具
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdOrderMouldController : BaseController<PdOrderMould>
+    public class PdOrderMouldController : BaseController1<PdOrderMould>
     {
         /// <summary>
         /// 生产工单-工模治具

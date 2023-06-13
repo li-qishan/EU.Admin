@@ -16,7 +16,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BFProject.Project
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmLovDetailController : BaseController<SmLovDetail>
+    public class SmLovDetailController : BaseController1<SmLovDetail>
     {
         public SmLovDetailController(DataContext _context, IBaseCRUDVM<SmLovDetail> BaseCrud) : base(_context, BaseCrud)
         {

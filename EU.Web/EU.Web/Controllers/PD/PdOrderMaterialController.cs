@@ -14,7 +14,7 @@ namespace EU.Web.Controllers.PD
     /// 生产工单-材料明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdOrderMaterialController : BaseController<PdOrderMaterial>
+    public class PdOrderMaterialController : BaseController1<PdOrderMaterial>
     {
         /// <summary>
         /// 生产工单-材料明细

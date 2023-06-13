@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.BD
     /// 货位
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class GoodsLocationController : BaseController<GoodsLocation>
+    public class GoodsLocationController : BaseController1<GoodsLocation>
     {
         /// <summary>
         /// 

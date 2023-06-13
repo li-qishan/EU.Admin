@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.AR
     /// 应收期初建账明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArInitAccountDetailController : BaseController<ArInitAccountDetail>
+    public class ArInitAccountDetailController : BaseController1<ArInitAccountDetail>
     {
         /// <summary>
         /// 应收期初建账明细

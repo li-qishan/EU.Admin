@@ -11,7 +11,7 @@ namespace EU.Web.Controllers.System.Setup
     /// 区县
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmCountyController : BaseController<SmCounty>
+    public class SmCountyController : BaseController1<SmCounty>
     {
         private readonly IConfiguration Configuration;
         public SmCountyController(IConfiguration configuration, DataContext _context, IBaseCRUDVM<SmCounty> BaseCrud) : base(_context, BaseCrud)

@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PD
     /// 产品完工入库
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdCompleteOrderController : BaseController<PdCompleteOrder>
+    public class PdCompleteOrderController : BaseController1<PdCompleteOrder>
     {
         /// <summary>
         /// 产品完工入库

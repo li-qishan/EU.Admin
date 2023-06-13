@@ -17,7 +17,7 @@ namespace EU.Web.Controllers.PO
     /// 采购到货通知单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class ArrivalOrderController : BaseController<ArrivalOrder>
+    public class ArrivalOrderController : BaseController1<ArrivalOrder>
     {
         /// <summary>
         /// 采购到货通知单

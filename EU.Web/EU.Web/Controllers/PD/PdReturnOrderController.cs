@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PD
     /// 材料退库工单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdReturnOrderController : BaseController<PdReturnOrder>
+    public class PdReturnOrderController : BaseController1<PdReturnOrder>
     {
         /// <summary>
         /// 材料退库工单

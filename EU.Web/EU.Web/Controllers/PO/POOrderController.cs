@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.PO
     /// 采购单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class POOrderController : BaseController<POOrder>
+    public class POOrderController : BaseController1<POOrder>
     {
         /// <summary>
         /// 采购单

@@ -13,7 +13,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.PD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdPlanOrderController : BaseController<PdPlanOrder>
+    public class PdPlanOrderController : BaseController1<PdPlanOrder>
     {
 
         public PdPlanOrderController(DataContext _context, IBaseCRUDVM<PdPlanOrder> BaseCrud) : base(_context, BaseCrud)

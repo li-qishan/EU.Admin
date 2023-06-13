@@ -20,7 +20,7 @@ namespace EU.Web.Controllers.IV
     /// 库存调整单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.IV)]
-    public class IvAdjustDetailController : BaseController<IvAdjustDetail>
+    public class IvAdjustDetailController : BaseController1<IvAdjustDetail>
     {
         /// <summary>
         /// 库存调整单明细

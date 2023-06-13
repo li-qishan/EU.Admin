@@ -20,7 +20,7 @@ namespace EU.Web.Controllers.PD
     /// 材料出库工单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdOutOrderController : BaseController<PdOutOrder>
+    public class PdOutOrderController : BaseController1<PdOutOrder>
     {
         /// <summary>
         /// 材料出库工单

@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.PD
     /// 产品完工入库-工单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdCompleteDetailController : BaseController<PdCompleteDetail>
+    public class PdCompleteDetailController : BaseController1<PdCompleteDetail>
     {
         /// <summary>
         /// 产品完工入库-工单明细

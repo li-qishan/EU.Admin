@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PO
     /// 采购扣款单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class PoDeductionDetailController : BaseController<PoDeductionDetail>
+    public class PoDeductionDetailController : BaseController1<PoDeductionDetail>
     {
         /// <summary>
         /// 采购扣款单明细

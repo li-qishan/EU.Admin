@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.IV
     /// 设备基础资料
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.EM)]
-    public class MachineController : BaseController<Machine>
+    public class MachineController : BaseController1<Machine>
     {
         /// <summary>
         /// 设备基础资料

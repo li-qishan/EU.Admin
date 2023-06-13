@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class CustomerInvoiceController : BaseController<CustomerInvoice>
+    public class CustomerInvoiceController : BaseController1<CustomerInvoice>
     {
         public CustomerInvoiceController(DataContext _context, IBaseCRUDVM<CustomerInvoice> BaseCrud) : base(_context, BaseCrud)
         {

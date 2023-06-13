@@ -16,7 +16,7 @@ namespace EU.Web.Controllers.AP
     /// 应付发票单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApInvoiceDetailController : BaseController<ApInvoiceDetail>
+    public class ApInvoiceDetailController : BaseController1<ApInvoiceDetail>
     {
         /// <summary>
         /// 应付发票单明细

@@ -20,7 +20,7 @@ namespace EU.Web.Controllers.AP
     /// 应付发票单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApInvoiceOrderController : BaseController<ApInvoiceOrder>
+    public class ApInvoiceOrderController : BaseController1<ApInvoiceOrder>
     {
         /// <summary>
         /// 应付发票单

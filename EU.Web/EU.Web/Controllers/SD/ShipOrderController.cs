@@ -18,7 +18,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.SD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.SD)]
-    public class ShipOrderController : BaseController<ShipOrder>
+    public class ShipOrderController : BaseController1<ShipOrder>
     {
         public new readonly IBaseCRUDVM<ShipOrder> _BaseCrud;
 

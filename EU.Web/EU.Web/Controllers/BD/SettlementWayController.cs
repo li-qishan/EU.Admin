@@ -13,7 +13,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class SettlementWayController : BaseController<SettlementWay>
+    public class SettlementWayController : BaseController1<SettlementWay>
     {
         public SettlementWayController(DataContext _context, IBaseCRUDVM<SettlementWay> BaseCrud) : base(_context, BaseCrud)
         {

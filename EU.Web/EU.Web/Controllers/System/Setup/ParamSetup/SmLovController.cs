@@ -18,7 +18,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmLovController : BaseController<SmLov>
+    public class SmLovController : BaseController1<SmLov>
     {
         public SmLovController(DataContext _context, IBaseCRUDVM<SmLov> BaseCrud) : base(_context, BaseCrud)
         {

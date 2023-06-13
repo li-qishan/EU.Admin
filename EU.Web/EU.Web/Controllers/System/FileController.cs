@@ -23,7 +23,7 @@ namespace EU.Web.Controllers.System
     /// 文件服务
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class FileController : BaseController<FileAttachment>
+    public class FileController : BaseController1<FileAttachment>
     {
         /// <summary>
         /// 配置信息

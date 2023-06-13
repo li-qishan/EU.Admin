@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.MF
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.MF)]
-    public class MouldTypeController : BaseController<MouldType>
+    public class MouldTypeController : BaseController1<MouldType>
     {
         public MouldTypeController(DataContext _context, IBaseCRUDVM<MouldType> BaseCrud) : base(_context, BaseCrud)
         {

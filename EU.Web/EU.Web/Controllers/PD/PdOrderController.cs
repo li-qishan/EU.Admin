@@ -21,7 +21,7 @@ namespace EU.Web.Controllers.PD
     /// 生产工单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdOrderController : BaseController<PdOrder>
+    public class PdOrderController : BaseController1<PdOrder>
     {
         /// <summary>
         /// 生产工单

@@ -36,7 +36,7 @@ namespace EU.Web.Controllers
     /// 系统用户
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Auth)]
-    public class AccountController : BaseController<SmUser>
+    public class AccountController : BaseController1<SmUser>
     {
         /// <summary>
         /// Jwt 服务

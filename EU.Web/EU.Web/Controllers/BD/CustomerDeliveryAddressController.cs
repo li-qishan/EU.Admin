@@ -12,7 +12,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class CustomerDeliveryAddressController : BaseController<CustomerDeliveryAddress>
+    public class CustomerDeliveryAddressController : BaseController1<CustomerDeliveryAddress>
     {
         public CustomerDeliveryAddressController(DataContext _context, IBaseCRUDVM<CustomerDeliveryAddress> BaseCrud) : base(_context, BaseCrud)
         {

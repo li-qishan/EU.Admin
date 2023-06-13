@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.CompanyStructure
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmCompanyController : BaseController<SmCompany>
+    public class SmCompanyController : BaseController1<SmCompany>
     {
         public SmCompanyController(DataContext _context, IBaseCRUDVM<SmCompany> BaseCrud) : base(_context, BaseCrud)
         {

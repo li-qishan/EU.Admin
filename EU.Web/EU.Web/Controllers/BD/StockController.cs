@@ -14,7 +14,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class StockController : BaseController<Stock>
+    public class StockController : BaseController1<Stock>
     {
         public StockController(DataContext _context, IBaseCRUDVM<Stock> BaseCrud) : base(_context, BaseCrud)
         {

@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PO
     /// 采购单预付账款
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class PoOrderPrepaymentController : BaseController<PoOrderPrepayment>
+    public class PoOrderPrepaymentController : BaseController1<PoOrderPrepayment>
     {
         /// <summary>
         /// 采购单预付账款

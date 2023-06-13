@@ -23,7 +23,7 @@ namespace EU.Web.Controllers.SD
     /// 出库单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.SD)]
-    public class OutOrderController : BaseController<OutOrder>
+    public class OutOrderController : BaseController1<OutOrder>
     {
         /// <summary>
         /// 出库单

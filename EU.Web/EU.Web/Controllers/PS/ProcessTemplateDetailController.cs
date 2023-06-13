@@ -13,7 +13,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.PS
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class ProcessTemplateDetailController : BaseController<ProcessTemplateDetail>
+    public class ProcessTemplateDetailController : BaseController1<ProcessTemplateDetail>
     {
 
         public ProcessTemplateDetailController(DataContext _context, IBaseCRUDVM<ProcessTemplateDetail> BaseCrud) : base(_context, BaseCrud)

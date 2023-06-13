@@ -21,7 +21,7 @@ namespace EU.Web.Controllers.AP
     /// 应付对账单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApCheckDetailController : BaseController<ApCheckDetail>
+    public class ApCheckDetailController : BaseController1<ApCheckDetail>
     {
         /// <summary>
         /// 应付对账单明细

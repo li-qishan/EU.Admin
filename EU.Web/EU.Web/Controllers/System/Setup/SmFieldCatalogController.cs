@@ -22,7 +22,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.Setup
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmFieldCatalogController : BaseController<SmFieldCatalog>
+    public class SmFieldCatalogController : BaseController1<SmFieldCatalog>
     {
 
         public SmFieldCatalogController(DataContext _context, IBaseCRUDVM<SmFieldCatalog> BaseCrud) : base(_context, BaseCrud)

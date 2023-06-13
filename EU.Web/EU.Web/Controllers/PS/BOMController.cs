@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PS
     /// 
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class BOMController : BaseController<BOM>
+    public class BOMController : BaseController1<BOM>
     {
         /// <summary>
         /// 

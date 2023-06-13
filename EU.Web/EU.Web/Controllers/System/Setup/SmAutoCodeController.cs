@@ -18,7 +18,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.Setup
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmAutoCodeController : BaseController<SmAutoCode>
+    public class SmAutoCodeController : BaseController1<SmAutoCode>
     {
         private readonly IConfiguration Configuration;
         public SmAutoCodeController(IConfiguration configuration, DataContext _context, IBaseCRUDVM<SmAutoCode> BaseCrud) : base(_context, BaseCrud)

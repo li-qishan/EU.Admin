@@ -19,7 +19,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.MF
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.MF)]
-    public class MfInOrderController : BaseController<MfInOrder>
+    public class MfInOrderController : BaseController1<MfInOrder>
     {
 
         public MfInOrderController(DataContext _context, IBaseCRUDVM<MfInOrder> BaseCrud) : base(_context, BaseCrud)

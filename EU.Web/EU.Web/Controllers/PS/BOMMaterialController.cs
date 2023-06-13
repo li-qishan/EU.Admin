@@ -20,7 +20,7 @@ namespace EU.Web.Controllers.PS
     /// 
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class BOMMaterialController : BaseController<BOMMaterial>
+    public class BOMMaterialController : BaseController1<BOMMaterial>
     {
         /// <summary>
         /// 

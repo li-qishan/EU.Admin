@@ -22,7 +22,7 @@ namespace EU.Web.Controllers.AR
     /// 应收期初建账
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArInitAccountOrderController : BaseController<ArInitAccountOrder>
+    public class ArInitAccountOrderController : BaseController1<ArInitAccountOrder>
     {
         /// <summary>
         /// 应收期初建账

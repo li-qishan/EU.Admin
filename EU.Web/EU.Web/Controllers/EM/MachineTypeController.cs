@@ -16,7 +16,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.IV
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.EM)]
-    public class MachineTypeController : BaseController<MachineType>
+    public class MachineTypeController : BaseController1<MachineType>
     {
 
         public MachineTypeController(DataContext _context, IBaseCRUDVM<MachineType> BaseCrud) : base(_context, BaseCrud)

@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class CurrencyController : BaseController<Currency>
+    public class CurrencyController : BaseController1<Currency>
     {
         public CurrencyController(DataContext _context, IBaseCRUDVM<Currency> BaseCrud) : base(_context, BaseCrud)
         {

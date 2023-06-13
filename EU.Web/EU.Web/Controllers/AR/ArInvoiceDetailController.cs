@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.AR
     /// 应收开票明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArInvoiceDetailController : BaseController<ArInvoiceDetail>
+    public class ArInvoiceDetailController : BaseController1<ArInvoiceDetail>
     {
         /// <summary>
         /// 应收开票明细

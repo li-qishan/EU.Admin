@@ -10,7 +10,7 @@ namespace EU.Web.Controllers.PD
     /// 生产工单-工艺路线
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdOrderProcessController : BaseController<PdOrderProcess>
+    public class PdOrderProcessController : BaseController1<PdOrderProcess>
     {
         /// <summary>
         /// 生产工单-工艺路线

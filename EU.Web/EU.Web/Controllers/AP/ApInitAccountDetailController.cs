@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.AP
     /// 应付期初建账明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApInitAccountDetailController : BaseController<ApInitAccountDetail>
+    public class ApInitAccountDetailController : BaseController1<ApInitAccountDetail>
     {
         /// <summary>
         /// 应付期初建账明细

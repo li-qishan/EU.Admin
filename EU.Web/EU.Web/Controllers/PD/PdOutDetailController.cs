@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.PD
     /// 材料出库工单-工单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdOutDetailController : BaseController<PdOutDetail>
+    public class PdOutDetailController : BaseController1<PdOutDetail>
     {
         /// <summary>
         /// 材料出库工单-工单明细

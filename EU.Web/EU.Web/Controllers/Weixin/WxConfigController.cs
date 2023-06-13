@@ -11,7 +11,7 @@ namespace EU.Web.Controllers.Weixin
     /// 微信配置
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class WxConfigController : BaseController<WxConfig>
+    public class WxConfigController : BaseController1<WxConfig>
     {
         public WxConfigContainer wxConfigContainer = new WxConfigContainer();
 

@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.IV
     /// 实际盘点录入
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.IV)]
-    public class IvActualCheckController : BaseController<IvActualCheck>
+    public class IvActualCheckController : BaseController1<IvActualCheck>
     {
         /// <summary>
         /// 

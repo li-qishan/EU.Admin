@@ -17,7 +17,7 @@ namespace EU.Web.Controllers.PD
     /// 工单分析
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdRequireAnalysisController : BaseController<PdRequireAnalysis>
+    public class PdRequireAnalysisController : BaseController1<PdRequireAnalysis>
     {
 
         /// <summary>

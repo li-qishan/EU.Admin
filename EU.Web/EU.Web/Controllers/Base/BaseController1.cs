@@ -37,7 +37,7 @@ namespace EU.Web.Controllers
     [ApiController]
     [Authorize(Policy = "Permission")]
     //[AuthorizeJwt]
-    public class BaseController<T> : ControllerBase where T : class
+    public class BaseController1<T> : ControllerBase where T : class
     {
         /// <summary>
         /// _context
@@ -74,7 +74,7 @@ namespace EU.Web.Controllers
         /// </summary>
         /// <param name="context"></param>
         /// <param name="BaseCrud"></param>
-        public BaseController(DataContext context, IBaseCRUDVM<T> BaseCrud)
+        public BaseController1(DataContext context, IBaseCRUDVM<T> BaseCrud)
         {
             _context = context;
             _BaseCrud = BaseCrud;

@@ -16,7 +16,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.PS
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class WorkShopController : BaseController<WorkShop>
+    public class WorkShopController : BaseController1<WorkShop>
     {
 
         public WorkShopController(DataContext _context, IBaseCRUDVM<WorkShop> BaseCrud) : base(_context, BaseCrud)

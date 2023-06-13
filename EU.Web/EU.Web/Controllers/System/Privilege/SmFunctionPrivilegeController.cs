@@ -12,7 +12,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.Privilege
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmFunctionPrivilegeController : BaseController<SmFunctionPrivilege>
+    public class SmFunctionPrivilegeController : BaseController1<SmFunctionPrivilege>
     {
         public SmFunctionPrivilegeController(DataContext _context, IBaseCRUDVM<SmFunctionPrivilege> BaseCrud) : base(_context, BaseCrud)
         {

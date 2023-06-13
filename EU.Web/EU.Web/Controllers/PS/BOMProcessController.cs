@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.PS
     /// BOM工艺路线
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class BOMProcessController : BaseController<BOMProcess>
+    public class BOMProcessController : BaseController1<BOMProcess>
     {
         /// <summary>
         /// BOM工艺路线

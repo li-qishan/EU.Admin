@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PO
     /// 采购入库单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class InOrderController : BaseController<InOrder>
+    public class InOrderController : BaseController1<InOrder>
     {
         /// <summary>
         /// 采购入库单

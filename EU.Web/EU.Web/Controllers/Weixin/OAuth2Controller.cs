@@ -34,7 +34,7 @@ namespace EU.Web.Controllers.Weixin
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
     [Route("api/Weixin/[controller]/[action]")]
-    public class OAuth2Controller : BaseController<SmModule>
+    public class OAuth2Controller : BaseController1<SmModule>
     {
         public WxConfigContainer wxConfigContainer = new WxConfigContainer();
         /// <summary>

@@ -20,7 +20,7 @@ namespace EU.Web.Controllers.AR
     /// 应收对账单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArCheckOrderController : BaseController<ArCheckOrder>
+    public class ArCheckOrderController : BaseController1<ArCheckOrder>
     {
         /// <summary>
         /// 应收对账单

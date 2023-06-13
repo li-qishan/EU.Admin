@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.PO
     /// 请购单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class RequestionDetailController : BaseController<RequestionDetail>
+    public class RequestionDetailController : BaseController1<RequestionDetail>
     {
         /// <summary>
         /// 请购单明细

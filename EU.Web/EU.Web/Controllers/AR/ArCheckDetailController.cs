@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.AR
     /// 应收对账单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArCheckDetailController : BaseController<ArCheckDetail>
+    public class ArCheckDetailController : BaseController1<ArCheckDetail>
     {
         /// <summary>
         /// 应收对账单明细

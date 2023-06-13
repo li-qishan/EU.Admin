@@ -32,7 +32,7 @@ namespace EU.Web.Controllers.System
     /// 公共方法
     /// </summary>
     [ApiController, Authorize(Policy = "Permission"), GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Auth)]
-    public class TokenController : BaseController<SmUser>
+    public class TokenController : BaseController1<SmUser>
     {
         private readonly IJwtAppService _jwtApp;
 

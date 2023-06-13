@@ -22,7 +22,7 @@ namespace EU.Web.Controllers.AP
     /// 应付期初建账
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApInitAccountOrderController : BaseController<ApInitAccountOrder>
+    public class ApInitAccountOrderController : BaseController1<ApInitAccountOrder>
     {
         /// <summary>
         /// 应付期初建账

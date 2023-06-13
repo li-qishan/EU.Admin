@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.IV
     /// 其他入库单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.IV)]
-    public class IvOtherOutDetailController : BaseController<IvOtherOutDetail>
+    public class IvOtherOutDetailController : BaseController1<IvOtherOutDetail>
     {
         /// <summary>
         /// 其他入库单明细

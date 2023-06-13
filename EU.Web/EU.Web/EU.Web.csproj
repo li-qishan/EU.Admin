@@ -10,21 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\Base\**" />
     <Compile Remove="Controllers\BFProject\**" />
     <Compile Remove="Controllers\Loan\**" />
-    <Content Remove="Controllers\Base\**" />
     <Content Remove="Controllers\BFProject\**" />
     <Content Remove="Controllers\Loan\**" />
-    <EmbeddedResource Remove="Controllers\Base\**" />
     <EmbeddedResource Remove="Controllers\BFProject\**" />
     <EmbeddedResource Remove="Controllers\Loan\**" />
-    <None Remove="Controllers\Base\**" />
     <None Remove="Controllers\BFProject\**" />
     <None Remove="Controllers\Loan\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\BaseController.cs" />
+    <Compile Remove="Controllers\BaseController1.cs" />
     <Compile Remove="Startup1.cs" />
     <Compile Remove="Utility.cs" />
   </ItemGroup>

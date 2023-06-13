@@ -16,7 +16,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.SD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.SD)]
-    public class OutOrderDetailController : BaseController<OutOrderDetail>
+    public class OutOrderDetailController : BaseController1<OutOrderDetail>
     {
 
         public OutOrderDetailController(DataContext _context, IBaseCRUDVM<OutOrderDetail> BaseCrud) : base(_context, BaseCrud)

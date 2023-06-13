@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PS
     /// 工序机台
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class ProcessMachineController : BaseController<ProcessMachine>
+    public class ProcessMachineController : BaseController1<ProcessMachine>
     {
         /// <summary>
         /// 工序机台

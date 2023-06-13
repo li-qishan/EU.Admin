@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class DeliveryWayController : BaseController<DeliveryWay>
+    public class DeliveryWayController : BaseController1<DeliveryWay>
     {
         public DeliveryWayController(DataContext _context, IBaseCRUDVM<DeliveryWay> BaseCrud) : base(_context, BaseCrud)
         {

@@ -15,7 +15,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.IV
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.IV)]
-    public class IvInitController : BaseController<IvInit>
+    public class IvInitController : BaseController1<IvInit>
     {
 
         public IvInitController(DataContext _context, IBaseCRUDVM<IvInit> BaseCrud) : base(_context, BaseCrud)

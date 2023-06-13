@@ -24,7 +24,7 @@ namespace EU.Web.Controllers.System.Setup
     /// 系统参数配置
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmConfigGroupController : BaseController<SmConfigGroup>
+    public class SmConfigGroupController : BaseController1<SmConfigGroup>
     {
         private readonly IConfiguration Configuration;
         public SmConfigGroupController(IConfiguration configuration, DataContext _context, IBaseCRUDVM<SmConfigGroup> BaseCrud) : base(_context, BaseCrud)

@@ -14,7 +14,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.WorkFlow
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Procedure)]
-    public class SmProjectFlowController : BaseController<SmProjectFlow>
+    public class SmProjectFlowController : BaseController1<SmProjectFlow>
     {
         public SmProjectFlowController(DataContext _context, IBaseCRUDVM<SmProjectFlow> BaseCrud) : base(_context, BaseCrud)
         {

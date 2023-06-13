@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.AR
     /// 销售预收款明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AR)]
-    public class ArPrepaidDetailController : BaseController<ArPrepaidDetail>
+    public class ArPrepaidDetailController : BaseController1<ArPrepaidDetail>
     {
         /// <summary>
         /// 销售预收款明细

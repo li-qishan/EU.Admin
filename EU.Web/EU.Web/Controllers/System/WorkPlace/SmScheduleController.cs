@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.WorkPlace
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmScheduleController : BaseController<SmSchedule>
+    public class SmScheduleController : BaseController1<SmSchedule>
     {
         public SmScheduleController(DataContext _context, IBaseCRUDVM<SmSchedule> BaseCrud) : base(_context, BaseCrud)
         {

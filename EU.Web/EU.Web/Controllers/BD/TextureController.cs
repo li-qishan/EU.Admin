@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class TextureController : BaseController<Texture>
+    public class TextureController : BaseController1<Texture>
     {
         public TextureController(DataContext _context, IBaseCRUDVM<Texture> BaseCrud) : base(_context, BaseCrud)
         {

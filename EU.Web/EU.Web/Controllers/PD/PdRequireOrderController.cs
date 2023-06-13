@@ -18,7 +18,7 @@ namespace EU.Web.Controllers.PD
     /// 需求分析工单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdRequireOrderController : BaseController<PdRequireOrder>
+    public class PdRequireOrderController : BaseController1<PdRequireOrder>
     {
         /// <summary>
         /// 需求分析工单

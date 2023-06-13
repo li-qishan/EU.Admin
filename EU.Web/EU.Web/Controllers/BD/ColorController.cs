@@ -13,7 +13,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class ColorController : BaseController<Color>
+    public class ColorController : BaseController1<Color>
     {
 
         public ColorController(DataContext _context, IBaseCRUDVM<Color> BaseCrud) : base(_context, BaseCrud)

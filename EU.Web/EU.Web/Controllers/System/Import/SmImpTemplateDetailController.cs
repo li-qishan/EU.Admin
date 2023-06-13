@@ -17,7 +17,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.Import
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmImpTemplateDetailController : BaseController<SmImpTemplateDetail>
+    public class SmImpTemplateDetailController : BaseController1<SmImpTemplateDetail>
     {
 
         public SmImpTemplateDetailController(DataContext _context, IBaseCRUDVM<SmImpTemplateDetail> BaseCrud) : base(_context, BaseCrud)

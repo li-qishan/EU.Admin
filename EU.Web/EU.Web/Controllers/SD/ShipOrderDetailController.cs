@@ -20,7 +20,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.SD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.SD)]
-    public class ShipOrderDetailController : BaseController<ShipOrderDetail>
+    public class ShipOrderDetailController : BaseController1<ShipOrderDetail>
     {
 
         public ShipOrderDetailController(DataContext _context, IBaseCRUDVM<ShipOrderDetail> BaseCrud) : base(_context, BaseCrud)

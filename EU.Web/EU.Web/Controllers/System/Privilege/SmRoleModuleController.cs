@@ -20,7 +20,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.Privilege
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmRoleModuleController : BaseController<SmRoleModule>
+    public class SmRoleModuleController : BaseController1<SmRoleModule>
     {
         public SmRoleModuleController(DataContext _context, IBaseCRUDVM<SmRoleModule> BaseCrud) : base(_context, BaseCrud)
         {

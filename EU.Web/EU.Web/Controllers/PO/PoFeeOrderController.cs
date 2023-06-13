@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.PO
     /// 采购费用单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class PoFeeOrderController : BaseController<PoFeeOrder>
+    public class PoFeeOrderController : BaseController1<PoFeeOrder>
     {
         /// <summary>
         /// 采购费用单

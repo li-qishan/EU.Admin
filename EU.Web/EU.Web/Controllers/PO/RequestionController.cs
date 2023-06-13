@@ -13,7 +13,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.PO
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class RequestionController : BaseController<Requestion>
+    public class RequestionController : BaseController1<Requestion>
     {
 
         public RequestionController(DataContext _context, IBaseCRUDVM<Requestion> BaseCrud) : base(_context, BaseCrud)

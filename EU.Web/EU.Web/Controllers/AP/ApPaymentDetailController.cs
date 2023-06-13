@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.AP
     /// 采购付款单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApPaymentDetailController : BaseController<ApPaymentDetail>
+    public class ApPaymentDetailController : BaseController1<ApPaymentDetail>
     {
         /// <summary>
         /// 采购付款单明细

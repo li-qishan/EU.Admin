@@ -15,7 +15,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.IV
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.IV)]
-    public class IvTransfersController : BaseController<IvTransfers>
+    public class IvTransfersController : BaseController1<IvTransfers>
     {
 
         public IvTransfersController(DataContext _context, IBaseCRUDVM<IvTransfers> BaseCrud) : base(_context, BaseCrud)

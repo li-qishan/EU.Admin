@@ -25,7 +25,7 @@ namespace EU.Web.Controllers.Weixin
     /// 微信菜单
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class WxMenuController : BaseController<WxMenu>
+    public class WxMenuController : BaseController1<WxMenu>
     {
         public WxConfigContainer wxConfigContainer = new WxConfigContainer();
 

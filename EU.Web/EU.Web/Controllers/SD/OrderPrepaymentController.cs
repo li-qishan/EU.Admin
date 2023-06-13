@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.SD
     /// 销售单预付账款
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.SD)]
-    public class OrderPrepaymentController : BaseController<OrderPrepayment>
+    public class OrderPrepaymentController : BaseController1<OrderPrepayment>
     {
         /// <summary>
         /// 销售单预付账款

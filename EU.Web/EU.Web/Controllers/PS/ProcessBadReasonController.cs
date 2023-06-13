@@ -16,7 +16,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.PS
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PS)]
-    public class ProcessBadReasonController : BaseController<ProcessBadReason>
+    public class ProcessBadReasonController : BaseController1<ProcessBadReason>
     {
 
         public ProcessBadReasonController(DataContext _context, IBaseCRUDVM<ProcessBadReason> BaseCrud) : base(_context, BaseCrud)

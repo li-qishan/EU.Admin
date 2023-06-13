@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class MaterialController : BaseController<Material>
+    public class MaterialController : BaseController1<Material>
     {
         public MaterialController(DataContext _context, IBaseCRUDVM<Material> BaseCrud) : base(_context, BaseCrud)
         {

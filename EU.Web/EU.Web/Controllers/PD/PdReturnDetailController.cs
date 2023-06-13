@@ -15,7 +15,7 @@ namespace EU.Web.Controllers.PD
     /// 材料退库工单-工单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdReturnDetailController : BaseController<PdReturnDetail>
+    public class PdReturnDetailController : BaseController1<PdReturnDetail>
     {
         /// <summary>
         /// 材料退库工单-工单明细

@@ -21,7 +21,7 @@ namespace EU.Web.Controllers.System.Setup
     /// 省份
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmProvinceController : BaseController<SmProvince>
+    public class SmProvinceController : BaseController1<SmProvince>
     {
         private readonly IConfiguration Configuration;
         public SmProvinceController(IConfiguration configuration, DataContext _context, IBaseCRUDVM<SmProvince> BaseCrud) : base(_context, BaseCrud)

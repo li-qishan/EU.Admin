@@ -20,7 +20,7 @@ namespace EU.Web.Controllers.AP
     /// 采购预付款明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.AP)]
-    public class ApPrepaidDetailController : BaseController<ApPrepaidDetail>
+    public class ApPrepaidDetailController : BaseController1<ApPrepaidDetail>
     {
         /// <summary>
         /// 采购预付款明细

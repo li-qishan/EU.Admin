@@ -14,7 +14,7 @@ namespace EU.Web.Controllers.PD
     /// 材料补发工单-工单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PD)]
-    public class PdReissueDetailController : BaseController<PdReissueDetail>
+    public class PdReissueDetailController : BaseController1<PdReissueDetail>
     {
         /// <summary>
         /// 材料补发工单-工单明细

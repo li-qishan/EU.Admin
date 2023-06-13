@@ -22,7 +22,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmModuleColumnController : BaseController<SmModuleColumn>
+    public class SmModuleColumnController : BaseController1<SmModuleColumn>
     {
         RedisCacheService RedisCacheService = new RedisCacheService(2);
         public SmModuleColumnController(DataContext _context, IBaseCRUDVM<SmModuleColumn> BaseCrud) : base(_context, BaseCrud)

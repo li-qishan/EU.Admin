@@ -23,7 +23,7 @@ namespace EU.Web.Controllers.Weixin
     /// Interface
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class GetInterfaceController : BaseController<SmModule>
+    public class GetInterfaceController : BaseController1<SmModule>
     {
         /// <summary>
         /// Interface

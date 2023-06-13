@@ -36,7 +36,7 @@ namespace EU.Web.Controllers
     /// 系统模块
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmModuleController : BaseController<SmModule>
+    public class SmModuleController : BaseController1<SmModule>
     {
         RedisCacheService RedisCacheService = new RedisCacheService(1);
 

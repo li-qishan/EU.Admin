@@ -23,7 +23,7 @@ namespace EU.Web.Controllers.SD
     /// 销售订单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.SD)]
-    public class OrderDetailController : BaseController<OrderDetail>
+    public class OrderDetailController : BaseController1<OrderDetail>
     {
         /// <summary>
         /// 销售订单明细

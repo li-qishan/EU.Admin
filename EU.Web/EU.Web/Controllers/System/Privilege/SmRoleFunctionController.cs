@@ -19,7 +19,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.Privilege
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmRoleFunctionController : BaseController<SmRoleFunction>
+    public class SmRoleFunctionController : BaseController1<SmRoleFunction>
     {
         RedisCacheService RedisCacheService = new RedisCacheService(1);
 

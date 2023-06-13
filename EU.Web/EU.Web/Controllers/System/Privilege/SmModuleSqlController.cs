@@ -19,7 +19,7 @@ using EU.Core.Utilities;
 namespace EU.Web.Controllers.System.Privilege
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmModuleSqlController : EU.Web.Controllers.BaseController<SmModuleSql>
+    public class SmModuleSqlController : EU.Web.Controllers.BaseController1<SmModuleSql>
     {
         RedisCacheService RedisCacheService = new RedisCacheService(2);
         public SmModuleSqlController(DataContext _context, IBaseCRUDVM<SmModuleSql> BaseCrud) : base(_context, BaseCrud)

@@ -20,7 +20,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.MF
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.MF)]
-    public class MfInOrderDetailController : BaseController<MfInOrderDetail>
+    public class MfInOrderDetailController : BaseController1<MfInOrderDetail>
     {
 
         public MfInOrderDetailController(DataContext _context, IBaseCRUDVM<MfInOrderDetail> BaseCrud) : base(_context, BaseCrud)

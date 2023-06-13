@@ -25,7 +25,7 @@ namespace EU.Web.Controllers.System.Setup
     /// 系统表字典
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmTableCatalogController : BaseController<SmTableCatalog>
+    public class SmTableCatalogController : BaseController1<SmTableCatalog>
     {
         public SmTableCatalogController(DataContext _context, IBaseCRUDVM<SmTableCatalog> BaseCrud) : base(_context, BaseCrud)
         {

@@ -17,7 +17,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.PO
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.PO)]
-    public class POReturnOrderDetailController : BaseController<POReturnOrderDetail>
+    public class POReturnOrderDetailController : BaseController1<POReturnOrderDetail>
     {
 
         public POReturnOrderDetailController(DataContext _context, IBaseCRUDVM<POReturnOrderDetail> BaseCrud) : base(_context, BaseCrud)

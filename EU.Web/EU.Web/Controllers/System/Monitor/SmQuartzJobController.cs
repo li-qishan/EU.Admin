@@ -17,7 +17,7 @@ using EU.Core.Const;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class SmQuartzJobController : BaseController<SmQuartzJob>
+    public class SmQuartzJobController : BaseController1<SmQuartzJob>
     {
 
         public SmQuartzJobController(DataContext _context, IBaseCRUDVM<SmQuartzJob> BaseCrud) : base(_context, BaseCrud)

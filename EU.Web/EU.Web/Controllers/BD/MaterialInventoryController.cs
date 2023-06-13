@@ -11,7 +11,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.BD
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class MaterialInventoryController : BaseController<BdMaterialInventory>
+    public class MaterialInventoryController : BaseController1<BdMaterialInventory>
     {
         public MaterialInventoryController(DataContext _context, IBaseCRUDVM<BdMaterialInventory> BaseCrud) : base(_context, BaseCrud)
         {

@@ -19,7 +19,7 @@ namespace EU.Web.Controllers.IV
     /// 库存调拨单明细
     /// </summary>
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.IV)]
-    public class IvTransfersDetailController : BaseController<IvTransfersDetail>
+    public class IvTransfersDetailController : BaseController1<IvTransfersDetail>
     {
         /// <summary>
         /// 库存调拨单明细

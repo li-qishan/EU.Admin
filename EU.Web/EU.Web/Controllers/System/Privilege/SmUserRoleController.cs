@@ -14,7 +14,7 @@ using static EU.Core.Const.Consts;
 namespace EU.Web.Controllers.System.Privilege
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class SmUserRoleController : BaseController<SmUserRole>
+    public class SmUserRoleController : BaseController1<SmUserRole>
     {
         public SmUserRoleController(DataContext _context, IBaseCRUDVM<SmUserRole> BaseCrud) : base(_context, BaseCrud)
         {
