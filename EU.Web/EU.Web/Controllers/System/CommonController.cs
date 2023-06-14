@@ -21,6 +21,12 @@ using static EU.Core.Const.Consts;
 using EU.Domain.System;
 using EU.Core.Entry;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Dapper.SqlMapper;
+using EU.DataAccess;
+using SqlSugar;
+using EU.Domain;
+using EU.Model.System.CompanyStructure;
+using EU.Core.DBManager;
 
 namespace EU.Web.Controllers.System
 {
@@ -28,23 +34,11 @@ namespace EU.Web.Controllers.System
     /// 公共方法
     /// </summary>
     [ApiController, Authorize(Policy = "Permission"), Route("api/[controller]/[action]"), GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.System)]
-    public class CommonController : ControllerBase
+    public class CommonController : BaseController<SmCounty>
     {
-
-        /// <summary>
-        /// 配置信息
-        /// </summary>
-        private readonly IConfiguration _configuration;
-
-        /// <summary>
-        /// 公共方法
-        /// </summary>
-        /// <param name="configuration"></param>
-        public CommonController(IConfiguration configuration)
+        public CommonController(IUnitOfWorkManage unitOfWorkManage) : base(unitOfWorkManage)
         {
-            _configuration = configuration;
         }
-
         #region 生成表模型
         /// <summary>
         /// 生成表模型
@@ -256,17 +250,25 @@ namespace EU.Web.Controllers.System
         /// </summary>
         /// <param name="module"></param>
         /// <returns></returns>
-        [HttpPost, AllowAnonymous]
+        [HttpGet, AllowAnonymous]
         public async Task<ServiceResult> Test1()
         {
             //var cache = await _context.SmModuleColumn.Where(o => o.SmModuleId == Guid.Parse("53c6f4c2-ef16-4580-9454-dad4f5cf6eea")).ToListAsync();
 
             //return Ok(obj);
 
-            string sql = "SELECT CheckQTY FROM ApCheckDetailSum_V";
-            var dtColumn = (await DBHelper.Instance.QueryListAsync<ApCheckDetailExtend>(sql));
+            //string sql = "SELECT CheckQTY FROM ApCheckDetailSum_V";
+            //var dtColumn = (await DBHelper.Instance.QueryListAsync<ApCheckDetailExtend>(sql));
 
-            return ServiceResult.OprateSuccess();
+            using var _context = ContextFactory.CreateContext();
+            var totalCount = 0;
+
+            var list = await _db.Queryable<SmProvince>()
+              //.OrderByIF(!string.IsNullOrEmpty(orderByFields), orderByFields)
+              //.WhereIF(whereExpression != null, whereExpression)
+              .ToPageListAsync(1, 15, totalCount);
+
+            return ServiceResult<List<SmProvince>>.OprateSuccess(list, "操作成功");
 
         }
 

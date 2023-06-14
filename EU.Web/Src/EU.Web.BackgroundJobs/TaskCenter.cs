@@ -1,6 +1,6 @@
 ﻿//using EU.Core;
 //using EU.Core.Const;
-//using EU.Core.Services;
+//using EU.Core.LogHelper;
 using System;
 using System.ComponentModel.Design;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Linq;
 using EU.Core;
 using EU.Core.Configuration;
 using EU.Core.Const;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Utilities;
 using EU.TaskHelper;
 using Microsoft.Extensions.Configuration;

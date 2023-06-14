@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Data;
 using EU.Core.Dapper;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using System.Globalization;
 using EU.Core.Randoms;
 using Util.Tools.QrCode.QrCoder;

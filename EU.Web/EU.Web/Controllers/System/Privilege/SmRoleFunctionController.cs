@@ -274,6 +274,7 @@ namespace EU.Web.Controllers.System.Privilege
         #endregion
 
         #region 获取角色功能定义
+        [HttpGet]
         public async Task<ServiceResult> GetRoleFuncPriv(Guid RoleId)
         {
             try

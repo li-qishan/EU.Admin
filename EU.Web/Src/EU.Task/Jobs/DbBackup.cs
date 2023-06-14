@@ -1,5 +1,5 @@
 ﻿
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Utilities;
 using Microsoft.IdentityModel.Tokens;
 using Quartz;

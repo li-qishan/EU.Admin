@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EU.Core;
 using EU.Core.Const;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Utilities;
 using EU.DataAccess;
 using EU.Model;

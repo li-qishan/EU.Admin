@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using EU.Core.Configuration;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 

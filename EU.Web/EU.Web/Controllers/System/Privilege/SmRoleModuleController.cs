@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EU.Core.Const;
 using EU.Core.Entry;
 using EU.Core.Module;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.DataAccess;
 using EU.Domain;
 using EU.Domain.System;

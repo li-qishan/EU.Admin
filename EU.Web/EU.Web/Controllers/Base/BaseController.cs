@@ -6,8 +6,11 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using EU.Core;
 using EU.Core.Attributes;
+using EU.Core.Configuration;
 using EU.Core.Const;
+using EU.Core.DBManager;
 using EU.Core.Entry;
 using EU.Core.Extensions;
 using EU.Core.Module;
@@ -18,6 +21,7 @@ using EU.Domain;
 using EU.Domain.System;
 using EU.Model.System;
 using EU.Model.System.WorkFlow;
+using Google.Protobuf.WellKnownTypes;
 //using EU.Model.System;
 //using EU.Model.System.WorkFlow;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +43,59 @@ namespace EU.Web.Controllers
     //[AuthorizeJwt]
     public class BaseController<T> : ControllerBase where T : class
     {
+        private readonly IUnitOfWorkManage _unitOfWorkManage;
+        private readonly SqlSugar.SqlSugarScope _dbBase;
+
+        public SqlSugar.ISqlSugarClient _db
+        {
+            get
+            {
+                SqlSugar.ISqlSugarClient db = _dbBase;
+
+                /* 如果要开启多库支持，
+                * 1、在appsettings.json 中开启MutiDBEnabled节点为true，必填
+                * 2、设置一个主连接的数据库ID，节点MainDB，对应的连接字符串的Enabled也必须true，必填
+                */
+                //if (AppSetting.app(new[] { "MutiDBEnabled" }).ObjToBool())
+                //{
+                //    //修改使用 model备注字段作为切换数据库条件，使用sqlsugar TenantAttribute存放数据库ConnId
+                //    //参考 https://www.donet5.com/Home/Doc?typeId=2246
+                //    var tenantAttr = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
+                //    if (tenantAttr != null)
+                //    {
+                //        //统一处理 configId 小写
+                //        db = _dbBase.GetConnectionScope(tenantAttr.configId.ToString().ToLower());
+                //        return db;
+                //    }
+                //}
+
+                //多租户
+                //var mta = typeof(TEntity).GetCustomAttribute<MultiTenantAttribute>();
+                //if (mta is { TenantType: TenantTypeEnum.Db })
+                //{
+                //    //获取租户信息 租户信息可以提前缓存下来 
+                //    if (App.User is { TenantId: > 0 })
+                //    {
+                //        var tenant = db.Queryable<SysTenant>().WithCache().Where(s => s.Id == App.User.TenantId).First();
+                //        if (tenant != null)
+                //        {
+                //            var iTenant = db.AsTenant();
+                //            if (!iTenant.IsAnyConnection(tenant.ConfigId))
+                //            {
+                //                iTenant.AddConnection(tenant.GetConnectionConfig());
+                //            }
+
+                //            return iTenant.GetConnectionScope(tenant.ConfigId);
+                //        }
+                //    }
+                //}
+
+                return db;
+            }
+        }
+
+        public SqlSugar.ISqlSugarClient Db => _db;
+
         /// <summary>
         /// _context
         /// </summary>
@@ -78,6 +135,11 @@ namespace EU.Web.Controllers
         {
             _context = context;
             _BaseCrud = BaseCrud;
+        }
+        public BaseController(IUnitOfWorkManage unitOfWorkManage)
+        {
+            _unitOfWorkManage = unitOfWorkManage;
+            _dbBase = unitOfWorkManage.GetDbClient();
         }
 
         #region 增删查改
@@ -899,6 +961,7 @@ namespace EU.Web.Controllers
                         return ExpressionType.Equal;
                     }
                 case "GreaterThan":
+
                     {
                         return ExpressionType.GreaterThan;
                     }
@@ -1410,11 +1473,6 @@ namespace EU.Web.Controllers
             obj.data = dt;
             status = "ok";
             message = "查询成功！";
-            //}
-            //catch (Exception E)
-            //{
-            //    message = E.Message;
-            //}
 
             obj.current = current;
             obj.pageSize = pageSize;
@@ -1571,19 +1629,6 @@ namespace EU.Web.Controllers
             string sql = grid.GetQueryString();
             DataTable dtTemp = DBHelper.Instance.GetDataTable(sql);
             DataTable dt = Utility.FormatDataTableForTree(moduleCode, userId, dtTemp);
-            //obj.data = dt;
-            //}
-            //catch (Exception E)
-            //{
-            //    message = E.Message;
-            //}
-
-            //obj.current = current;
-            //obj.pageSize = pageSize;
-            //obj.total = total;
-            //obj.status = status;
-            //obj.message = message;
-            //return Ok(obj);
             return ServiceResult<DataTable>.OprateSuccess(dt, total, ResponseText.QUERY_SUCCESS);
         }
 

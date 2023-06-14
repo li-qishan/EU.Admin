@@ -13,26 +13,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DBManager\Seed\SeedData\BusinessDataSeedData.cs" />
+    <Compile Remove="DBManager\Seed\SeedData\MultiBusinessDataSeedData.cs" />
+    <Compile Remove="DBManager\Seed\SeedData\MultiBusinessSubDataSeedData.cs" />
+    <Compile Remove="DBManager\Seed\SeedData\SubBusinessDataSeedData.cs" />
+    <Compile Remove="DBManager\Seed\SeedData\TenantSeedData.cs" />
+    <Compile Remove="DBManager\Seed\SeedData\UserInfoSeedData.cs" />
     <Compile Remove="EFDbContext\VOLContext.cs" />
     <Compile Remove="Module\ModuleSqlInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DBManager\Seed\SeedData\" />
     <Folder Include="HttpRestSharp\Impl\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
+    <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
+    <PackageReference Include="MiniProfiler.Shared" Version="4.3.8" />
     <PackageReference Include="MySql.Data" Version="8.0.26" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="Senparc.Weixin.MP" Version="16.18.9" />
     <PackageReference Include="Senparc.Weixin.Work" Version="3.15.12" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.83" />
     <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />

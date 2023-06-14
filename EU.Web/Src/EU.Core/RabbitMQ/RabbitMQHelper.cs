@@ -1,6 +1,6 @@
 ﻿using EU.Core.Configuration;
 using EU.Core.Const;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;

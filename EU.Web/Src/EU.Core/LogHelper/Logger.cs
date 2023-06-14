@@ -13,7 +13,7 @@ using EU.Core.Configuration;
 using EU.Core.DBManager;
 using EU.Core.Enums;
 
-namespace EU.Core.Services
+namespace EU.Core.LogHelper
 {
     /// <summary>
     /// 通过内置队列异步定时写日志

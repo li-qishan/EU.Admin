@@ -1,6 +1,6 @@
 ﻿
 using EU.Core;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Utilities;
 using EU.TaskHelper.QuartzNet;
 using Microsoft.EntityFrameworkCore;

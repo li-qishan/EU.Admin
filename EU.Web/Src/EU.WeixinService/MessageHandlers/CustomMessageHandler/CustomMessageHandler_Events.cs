@@ -152,7 +152,7 @@ QQ群：377815480
                         var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
                         reponseMessage = strongResponseMessage;
                         strongResponseMessage.Content = "您点击了底部按钮。\r\n为了测试微信软件换行bug的应对措施，这里做了一个——\r\n换行";
-                        EU.Core.Services.Logger.WriteLog("Weixin", "errmsg:" + strongResponseMessage.Content);
+                        EU.Core.LogHelper.Logger.WriteLog("Weixin", "errmsg:" + strongResponseMessage.Content);
                     }
                     break;
                 case "SubClickRoot_Text":
@@ -160,7 +160,7 @@ QQ群：377815480
                         var strongResponseMessage = CreateResponseMessage<ResponseMessageText>();
                         reponseMessage = strongResponseMessage;
                         strongResponseMessage.Content = "您点击了子菜单按钮。";
-                        EU.Core.Services.Logger.WriteLog("Weixin", "errmsg:" + strongResponseMessage.Content);
+                        EU.Core.LogHelper.Logger.WriteLog("Weixin", "errmsg:" + strongResponseMessage.Content);
                     }
                     break;
                 case "SubClickRoot_News":

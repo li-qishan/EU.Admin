@@ -1,7 +1,7 @@
 ﻿using EU.Core.Const;
 using EU.Core.DBManager;
 using EU.Core.Enums;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Utilities;
 using System;
 using System.Collections.Generic;

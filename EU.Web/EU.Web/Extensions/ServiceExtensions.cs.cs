@@ -10,7 +10,7 @@ using EU.Core.Const;
 using EU.Core;
 using EU.TaskHelper;
 using EU.Web.Controllers;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Utilities;
 
 namespace JianLian.HDIS.HttpApi.Hosting.Extensions

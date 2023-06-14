@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using EU.Core.Const;
 using Microsoft.AspNetCore.Components.Forms;
 using EU.Model;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 
 namespace EU.TaskHelper
 {

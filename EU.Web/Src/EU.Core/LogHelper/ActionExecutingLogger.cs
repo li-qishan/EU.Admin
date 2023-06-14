@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EU.Core.Services
+namespace EU.Core.LogHelper
 {
    public class ActionObserver
     {

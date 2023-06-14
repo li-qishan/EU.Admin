@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DotNetCore.CAP;
 using EU.Core.Const;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Model.System;
 
 namespace EU.EventBus.Subscriptions

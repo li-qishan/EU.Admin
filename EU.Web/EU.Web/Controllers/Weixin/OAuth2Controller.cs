@@ -14,7 +14,7 @@ using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
 using Senparc.Weixin;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using Senparc.CO2NET.Extensions;
 using System.Data;
 using EU.Domain.System;

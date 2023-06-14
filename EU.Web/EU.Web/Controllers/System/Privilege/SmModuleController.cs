@@ -19,7 +19,7 @@ using EU.Model.System.Privilege;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using EU.Core.Services;
+using EU.Core.LogHelper;
 using EU.Core.Extensions;
 using System.IO;
 using EU.Core.Configuration;

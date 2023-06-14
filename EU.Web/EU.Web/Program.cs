@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using JianLian.HDIS.HttpApi.Hosting.Extensions;
-
+using EU.Core.DBManager;
 
 var app = CreateHostBuilder(args).Build();
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +28,8 @@ catch (Exception e)
     var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     logger.LogError(e, "Database Migration Error!");
 }
-
+builder.Services.AddSqlsugarSetup();
+builder.Services.AddDbSetup();
 /// <summary>
 /// CreateHostBuilder
 /// </summary>

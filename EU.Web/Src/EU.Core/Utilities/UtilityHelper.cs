@@ -349,10 +349,7 @@ namespace EU.Core.Utilities
         {
             try
             {
-                //UserCustom userCustom = new UserCustom();
-                string companyId1 = string.Empty;
-                companyId1 = "e26f359a-4983-42d8-8769-19ddec5b7d23";
-                return companyId1;
+                return GetCompanyGuidId().ToString();
             }
             catch (Exception E)
             {
@@ -421,10 +418,7 @@ namespace EU.Core.Utilities
         {
             try
             {
-                //UserCustom userCustom = new UserCustom();
-                string companyId1 = string.Empty;
-                companyId1 = "1b5a932a-02a6-4abe-8477-4bd94e96e0e0";
-                return companyId1;
+                return GetGroupGuidId().ToString();
             }
             catch (Exception E)
             {
