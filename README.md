@@ -15,6 +15,7 @@
 后期还想做一个APP 基于RN
 
 [Gitee](https://gitee.com/xiaochanghai520/EU.Admin) | [Github](https://github.com/xiaochanghai/EU.Admin)
+
 ## 项目概述
 
 前后端分离，使用 JWT 认证。
@@ -24,18 +25,23 @@
 前端：基于Ant Design Pro，主技术栈：React、Ant Design
 
 * 前端采用React 17、Ant Design Pro 5、TypeScript、umi3。
-* 后端采用.NET6、Redis & Jwt。
+* 后端采用.NET7、Redis & Jwt。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
-* 高效率开发，使用代码生成器可以一键生成前后端代码。
 * 数据库：SQL Server2014,设计文档见（EU.Web/Model）,依托于PowerDesigner进行数据库设计
- 
+* 所有基础列表查询通过数据库，实现自定义查询，包括列的显示、类型、是否允许导出、宽度、顺序
+* 自定义导入导出，实现常规操作
+* 权限设计：用户关联角色，角色关联模块（菜单）
+
 ## 部署
 
 前端利用Nginx部署，后端是用IIS
 
-容器化部署[Docker部署](./doc/Docker部署.md)
-
+```bash
+容器化部署
+[Docker部署](./doc/Docker部署.md)
+开发环境发布工具、生产环境运维工具开发中
+```
 ## 在线体验
 
 http://124.221.9.198:8005/
@@ -107,6 +113,9 @@ https://github.com/JeffreySu/WeiXinMPSDK
 
 https://sdk.weixin.senparc.com/
 
+### Blog.Core
+https://gitee.com/laozhangIsPhi/Blog.Core
+
 感谢这些优秀的开源项目！
 
 ## 系统能力
@@ -115,12 +124,15 @@ https://sdk.weixin.senparc.com/
 - 授权：[基于策略（Policy）的授权](https://docs.microsoft.com/zh-cn/aspnet/core/security/authorization/policies?view=aspnetcore-6.0)
 - ORM：[EF Core](https://docs.microsoft.com/zh-cn/ef/core/) 的 [Code First 模式](https://docs.microsoft.com/zh-cn/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
 - 依赖注入：默认 DI 容器，实现自动注入
-- 缓存：[IDistributedCache](https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache)，默认注入 Memory Cache，可替换 Redis
-- 日志：[NLog](https://nlog-project.org/)
+- 提供 Redis 做缓存处理
+- 使用 Swagger 做api文档
+- 支持 CORS 跨域
 - 事件总线：[默认启用 BackgroupService](https://docs.microsoft.com/zh-cn/dotnet/core/extensions/queue-service?source=recommendations)，基于[Channel](https://docs.microsoft.com/zh-cn/dotnet/api/system.threading.channels.channel-1) 实现的单机版发布订阅；可替换为 Redis 的发布订阅（可用于分布式）；也可替换为 RabbitMQ 的发布订阅（可用于分布式）
-- 定时任务：Quartz
+- 定时任务：使用 Quartz.net 做任务调度
 - 对象映射：AutoMapper
-
+- RabbitMQ 消息队列
+- EventBus 事件总线 
+- 
 ## 数据库设计
 
 ![image-20230602140542](./doc/images/20230602140542.png)
@@ -143,6 +155,10 @@ https://sdk.weixin.senparc.com/
 
 当然，个人还是建议跟ABP框架那样再封装一层仓储，可以避免一些后续的开发运维问题（比如：系统迁移、重构等）。
 
+#### 为什么前端用React?
+
+答：现在国内大部分都是用vue，我个人可能比较喜欢react的语法吧，喜欢ant-design react版本，vue也会写写，后面会尝试深入学习vue
+
 ## 贡献
 
 - 提 Issue 请到 gitee
@@ -152,3 +168,7 @@ https://sdk.weixin.senparc.com/
 邮箱：xiaochanghai@foxmail.com
 
 部分内容来源与其他开源作者，谢谢
+
+## 感谢
+
+苏州市创采软件有限公司 费鹏先生
