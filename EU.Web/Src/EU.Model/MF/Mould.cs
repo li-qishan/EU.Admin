@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -62,25 +63,25 @@ namespace EU.Model
         /// <summary>
         /// 模穴数
         /// </summary>
-        [Display(Name = "QTY")]
+        [Display(Name = "QTY"), Column(TypeName = "decimal(20,2)")]
         public int QTY { get; set; }
 
         /// <summary>
         /// 成型时间（S）
         /// </summary>
-        [Display(Name = "MoldingTime")]
+        [Display(Name = "MoldingTime"), Column(TypeName = "decimal(20,2)")]
         public decimal MoldingTime { get; set; }
 
         /// <summary>
         /// 现有数量
         /// </summary>
-        [Display(Name = "CurrentQTY")]
+        [Display(Name = "CurrentQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal CurrentQTY { get; set; }
 
         /// <summary>
         /// 可用数量
         /// </summary>
-        [Display(Name = "AvailableQTY")]
+        [Display(Name = "AvailableQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal AvailableQTY { get; set; }
 
         /// <summary>

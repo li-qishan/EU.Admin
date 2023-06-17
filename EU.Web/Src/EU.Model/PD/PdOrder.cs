@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -48,7 +49,7 @@ namespace EU.Model
         /// <summary>
         /// 生产数量
         /// </summary>
-        [Display(Name = "QTY")]
+        [Display(Name = "QTY"), Column(TypeName = "decimal(20,6)")]
         public decimal QTY { get; set; }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace EU.Model
         /// <summary>
         /// 已完工数量
         /// </summary>
-        [Display(Name = "CompleteQTY")]
+        [Display(Name = "CompleteQTY"), Column(TypeName = "decimal(20,6)")]
         public decimal CompleteQTY { get; set; }
 
         /// <summary>

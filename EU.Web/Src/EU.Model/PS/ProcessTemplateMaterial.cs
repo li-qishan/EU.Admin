@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -38,7 +39,7 @@ namespace EU.Model
         /// <summary>
         /// 批量
         /// </summary>
-        [Display(Name = "BulkQty")]
+        [Display(Name = "BulkQty"), Column(TypeName = "decimal(20,6)")]
         public decimal? BulkQty { get; set; }
     }
 }

@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -86,25 +87,25 @@ namespace EU.Model
         /// <summary>
         /// 退货数量
         /// </summary>
-        [Display(Name = "ReturnQTY")]
+        [Display(Name = "ReturnQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal? ReturnQTY { get; set; }
 
         /// <summary>
         /// 未税金额
         /// </summary>
-        [Display(Name = "NoTaxAmount")]
+        [Display(Name = "NoTaxAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? NoTaxAmount { get; set; }
 
         /// <summary>
         /// 税额
         /// </summary>
-        [Display(Name = "TaxAmount")]
+        [Display(Name = "TaxAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxAmount { get; set; }
 
         /// <summary>
         /// 含税金额
         /// </summary>
-        [Display(Name = "TaxIncludedAmount")]
+        [Display(Name = "TaxIncludedAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxIncludedAmount { get; set; }
 
         /// <summary>

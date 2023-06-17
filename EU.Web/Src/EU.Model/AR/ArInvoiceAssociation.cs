@@ -18,6 +18,7 @@ using EU.Entity;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -56,25 +57,25 @@ namespace EU.Model
         /// <summary>
         /// 发票税率
         /// </summary>
-        [Display(Name = "TaxRate"), Description("发票税率")]
+        [Display(Name = "TaxRate"), Description("发票税率"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxRate { get; set; }
 
         /// <summary>
         /// 未税金额
         /// </summary>
-        [Display(Name = "NoTaxAmount"), Description("未税金额")]
+        [Display(Name = "NoTaxAmount"), Description("未税金额"), Column(TypeName = "decimal(20,2)")]
         public decimal? NoTaxAmount { get; set; }
 
         /// <summary>
         /// 税额
         /// </summary>
-        [Display(Name = "TaxAmount"), Description("税额")]
+        [Display(Name = "TaxAmount"), Description("税额"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxAmount { get; set; }
 
         /// <summary>
         /// 含税金额
         /// </summary>
-        [Display(Name = "TaxIncludedAmount"), Description("含税金额")]
+        [Display(Name = "TaxIncludedAmount"), Description("含税金额"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxIncludedAmount { get; set; }
 
         /// <summary>

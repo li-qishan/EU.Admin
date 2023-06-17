@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -48,7 +49,7 @@ namespace EU.Model
         /// <summary>
         /// 货位容量
         /// </summary>
-        [Display(Name = "货位容量")]
+        [Display(Name = "货位容量"), Column(TypeName = "decimal(20,2)")]
         public decimal? LocationCapacity { get; set; }
     }
 }

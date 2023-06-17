@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -55,7 +56,7 @@ namespace EU.Model
         /// <summary>
         /// 来源项次
         /// </summary>
-        [Display(Name = "SourceSerialNumber")]
+        [Display(Name = "SourceSerialNumber"), Column(TypeName = "decimal(20,8)")]
         public decimal SourceSerialNumber { get; set; }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace EU.Model
         /// <summary>
         /// 订单数量
         /// </summary>
-        [Display(Name = "QTY")]
+        [Display(Name = "QTY"), Column(TypeName = "decimal(20,8)")]
         public decimal QTY { get; set; }
 
         /// <summary>

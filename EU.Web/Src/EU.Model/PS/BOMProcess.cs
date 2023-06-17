@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -59,7 +60,7 @@ namespace EU.Model
         /// <summary>
         /// 单重
         /// </summary>
-        [Display(Name = "SingleWeight")]
+        [Display(Name = "SingleWeight"), Column(TypeName = "decimal(20,3)")]
         public decimal SingleWeight { get; set; }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace EU.Model
         /// <summary>
         /// 标准工时，保留两位小数
         /// </summary>
-        [Display(Name = "StandardHours")]
+        [Display(Name = "StandardHours"), Column(TypeName = "decimal(20,2)")]
         public decimal StandardHours { get; set; }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace EU.Model
         /// <summary>
         /// 标准工价
         /// </summary>
-        [Display(Name = "StandardWages")]
+        [Display(Name = "StandardWages"), Column(TypeName = "decimal(20,2)")]
         public decimal StandardWages { get; set; }
 
         /// <summary>
@@ -101,7 +102,7 @@ namespace EU.Model
         /// <summary>
         /// 工艺不良率（%），百分比数据
         /// </summary>
-        [Display(Name = "RejectRate")]
+        [Display(Name = "RejectRate"), Column(TypeName = "decimal(20,2)")]
         public decimal RejectRate { get; set; }
     }
 }

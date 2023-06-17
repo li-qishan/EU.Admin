@@ -1,6 +1,6 @@
 
 <div align="center"><h1>EU-Admin</h1></div>
-<div align="center"><h3>EU（yiyou） 一心一意 做好每件事</h3></div>
+<div align="center"><h3>EU（一优） 一心一意 做好每件事</h3></div>
 
 ## 前言
 

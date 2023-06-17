@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -80,19 +81,19 @@ namespace EU.Model
         /// <summary>
         /// 库存数量
         /// </summary>
-        [Display(Name = "QTY")]
+        [Display(Name = "QTY"), Column(TypeName = "decimal(20,8)")]
         public decimal QTY { get; set; }
 
         /// <summary>
         /// 实盘数量
         /// </summary>
-        [Display(Name = "ActualQTY")]
+        [Display(Name = "ActualQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal ActualQTY { get; set; }
 
         /// <summary>
         /// 盘点盈亏，实际盘点数量-账面库存数量，结果为正数，则表示盘盈，结果为负数，则表示盘亏
         /// </summary>
-        [Display(Name = "DiffQTY")]
+        [Display(Name = "DiffQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal DiffQTY { get; set; }
 
         /// <summary>

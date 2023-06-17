@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -44,19 +45,19 @@ namespace EU.Model
         /// <summary>
         /// 用量
         /// </summary>
-        [Display(Name = "Dosage")]
+        [Display(Name = "Dosage"), Column(TypeName = "decimal(20,4)")]
         public decimal Dosage { get; set; }
 
         /// <summary>
         /// 用量基数，默认1，用量基数为分母，用量为分子（比如用量基数为1000，用量为1，则单个用量则为千分之一）
         /// </summary>
-        [Display(Name = "DosageBase")]
+        [Display(Name = "DosageBase"), Column(TypeName = "decimal(20,2)")]
         public decimal DosageBase { get; set; }
 
         /// <summary>
         /// 损耗率，最好可设置阶梯损耗，比如0～1000损耗率为3%，1001～10000损耗率为2%，后续计算物料用量需要加上损耗
         /// </summary>
-        [Display(Name = "WastageRate")]
+        [Display(Name = "WastageRate"), Column(TypeName = "decimal(20,2)")]
         public decimal WastageRate { get; set; }
     }
 }

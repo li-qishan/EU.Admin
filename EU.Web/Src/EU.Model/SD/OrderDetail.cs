@@ -17,13 +17,14 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
     /// <summary>
     /// 销售订单明细
     /// </summary>
-    [Entity(TableCnName = "", TableName = "SdOrderDetail")]
+    [Entity(TableCnName = "销售订单明细", TableName = "SdOrderDetail")]
     public class OrderDetail : Base.PersistPoco
     {
 
@@ -61,31 +62,31 @@ namespace EU.Model
         /// <summary>
         /// 数量
         /// </summary>
-        [Display(Name = "Amount")]
+        [Display(Name = "Amount"), Column(TypeName = "decimal(20,8)")]
         public decimal QTY { get; set; }
 
         /// <summary>
         /// 单价
         /// </summary>
-        [Display(Name = "Price")]
+        [Display(Name = "Price"), Column(TypeName = "decimal(20,2)")]
         public decimal Price { get; set; }
 
         /// <summary>
         /// 未税金额
         /// </summary>
-        [Display(Name = "NoTaxAmount")]
+        [Display(Name = "NoTaxAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal NoTaxAmount { get; set; }
 
         /// <summary>
         /// 税额
         /// </summary>
-        [Display(Name = "TaxAmount")]
+        [Display(Name = "TaxAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal TaxAmount { get; set; }
 
         /// <summary>
         /// 含税金额
         /// </summary>
-        [Display(Name = "TaxIncludedAmount")]
+        [Display(Name = "TaxIncludedAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal TaxIncludedAmount { get; set; }
 
         /// <summary>
@@ -103,13 +104,13 @@ namespace EU.Model
         /// <summary>
         /// 出货数量
         /// </summary>
-        [Display(Name = "DeliveryrQTY")]
+        [Display(Name = "DeliveryrQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal DeliveryrQTY { get; set; }
 
         /// <summary>
         /// 退货数量
         /// </summary>
-        [Display(Name = "SalesReturnQTY")]
+        [Display(Name = "SalesReturnQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal SalesReturnQTY { get; set; }
 
         /// <summary>

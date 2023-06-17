@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -52,13 +53,13 @@ namespace EU.Model
         /// <summary>
         /// 标准加工时间
         /// </summary>
-        [Display(Name = "StandardMachineTime")]
+        [Display(Name = "StandardMachineTime"), Column(TypeName = "decimal(20,2)")]
         public decimal? StandardMachineTime { get; set; }
 
         /// <summary>
         /// 最大加工时间
         /// </summary>
-        [Display(Name = "MaxMachineTime")]
+        [Display(Name = "MaxMachineTime"), Column(TypeName = "decimal(20,2)")]
         public decimal? MaxMachineTime { get; set; }
 
         /// <summary>

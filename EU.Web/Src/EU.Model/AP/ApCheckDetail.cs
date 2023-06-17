@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -85,7 +86,7 @@ namespace EU.Model
         /// <summary>
         /// 交易数量
         /// </summary>
-        [Display(Name = "QTY")]
+        [Display(Name = "QTY"), Column(TypeName = "decimal(20,8)")]
         public decimal? QTY { get; set; }
 
         ///// <summary>
@@ -103,37 +104,37 @@ namespace EU.Model
         /// <summary>
         /// 对账数量
         /// </summary>
-        [Display(Name = "CheckQTY")]
+        [Display(Name = "CheckQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal? CheckQTY { get; set; }
 
         /// <summary>
         /// 单价
         /// </summary>
-        [Display(Name = "Price")]
+        [Display(Name = "Price"), Column(TypeName = "decimal(20,2)")]
         public decimal? Price { get; set; }
 
         /// <summary>
         /// 税率
         /// </summary>
-        [Display(Name = "TaxRate")]
+        [Display(Name = "TaxRate"), Column(TypeName = "decimal(20,6)")]
         public decimal? TaxRate { get; set; }
 
         /// <summary>
         /// 未税金额
         /// </summary>
-        [Display(Name = "NoTaxAmount")]
+        [Display(Name = "NoTaxAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? NoTaxAmount { get; set; }
 
         /// <summary>
         /// 含税金额
         /// </summary>
-        [Display(Name = "TaxIncludedAmount")]
+        [Display(Name = "TaxIncludedAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxIncludedAmount { get; set; }
 
         /// <summary>
         /// 税额
         /// </summary>
-        [Display(Name = "TaxAmount")]
+        [Display(Name = "TaxAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? TaxAmount { get; set; }
 
         /// <summary>

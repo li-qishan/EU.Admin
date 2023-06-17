@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -70,25 +71,25 @@ namespace EU.Model
         /// <summary>
         /// 存货计价
         /// </summary>
-        [Display(Name = "InventoryValuation")]
+        [Display(Name = "InventoryValuation"), Column(TypeName = "decimal(20,2)")]
         public decimal InventoryValuation { get; set; }
 
         /// <summary>
         /// 长
         /// </summary>
-        [Display(Name = "Length")]
+        [Display(Name = "Length"), Column(TypeName = "decimal(20,6)")]
         public decimal Length { get; set; }
 
         /// <summary>
         /// 宽
         /// </summary>
-        [Display(Name = "Width")]
+        [Display(Name = "Width"), Column(TypeName = "decimal(20,6)")]
         public decimal Width { get; set; }
 
         /// <summary>
         /// 高
         /// </summary>
-        [Display(Name = "Height")]
+        [Display(Name = "Height"), Column(TypeName = "decimal(20,6)")]
         public decimal Height { get; set; }
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace EU.Model
         /// <summary>
         /// 单重
         /// </summary>
-        [Display(Name = "SingleWeight")]
+        [Display(Name = "SingleWeight"), Column(TypeName = "decimal(20,6)")]
         public decimal SingleWeight { get; set; }
 
         /// <summary>
@@ -118,19 +119,19 @@ namespace EU.Model
         /// <summary>
         /// 最小起订量
         /// </summary>
-        [Display(Name = "MinOrder")]
+        [Display(Name = "MinOrder"), Column(TypeName = "decimal(20,8)")]
         public decimal MinOrder { get; set; }
 
         /// <summary>
         /// 安全库存量
         /// </summary>
-        [Display(Name = "SafetStock")]
+        [Display(Name = "SafetStock"), Column(TypeName = "decimal(20,8)")]
         public decimal SafetStock { get; set; }
 
         /// <summary>
         /// 最小采购量
         /// </summary>
-        [Display(Name = "MinPurchase")]
+        [Display(Name = "MinPurchase"), Column(TypeName = "decimal(20,8)")]
         public decimal MinPurchase { get; set; }
 
         /// <summary>
@@ -154,13 +155,13 @@ namespace EU.Model
         /// <summary>
         /// 采购价
         /// </summary>
-        [Display(Name = "PurchasePrice")]
+        [Display(Name = "PurchasePrice"), Column(TypeName = "decimal(20,2)")]
         public decimal PurchasePrice { get; set; }
 
         /// <summary>
         /// 最低销售价
         /// </summary>
-        [Display(Name = "MinSalesPrice")]
+        [Display(Name = "MinSalesPrice"), Column(TypeName = "decimal(20,2)")]
         public decimal MinSalesPrice { get; set; }
 
         /// <summary>

@@ -16,6 +16,7 @@
 */
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -92,7 +93,7 @@ namespace EU.Model
         /// <summary>
         /// 月销售目标
         /// </summary>
-        [Display(Name = "MonthsSalesAmount")]
-        public decimal? MonthsSalesAmount { get; set; }
+        [Display(Name = "MonthsSalesAmount"), Column(TypeName = "decimal(20,2)")]
+        public virtual decimal? MonthsSalesAmount { get; set; }
     }
 }

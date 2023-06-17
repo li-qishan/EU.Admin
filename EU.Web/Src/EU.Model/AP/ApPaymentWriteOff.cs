@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -79,31 +80,31 @@ namespace EU.Model
         /// <summary>
         /// 发票税率
         /// </summary>
-        [Display(Name = "InvoiceRate")]
+        [Display(Name = "InvoiceRate"), Column(TypeName = "decimal(20,2)")]
         public decimal? InvoiceRate { get; set; }
 
         /// <summary>
         /// 发票金额
         /// </summary>
-        [Display(Name = "InvoiceAmount")]
+        [Display(Name = "InvoiceAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? InvoiceAmount { get; set; }
 
         /// <summary>
         /// 预付金额
         /// </summary>
-        [Display(Name = "PaymentAmount")]
+        [Display(Name = "PaymentAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? PaymentAmount { get; set; }
 
         /// <summary>
         /// 未付金额
         /// </summary>
-        [Display(Name = "NoPaymentAmount")]
+        [Display(Name = "NoPaymentAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? NoPaymentAmount { get; set; }
 
         /// <summary>
         /// 实付金额
         /// </summary>
-        [Display(Name = "ActualPaymentAmount")]
+        [Display(Name = "ActualPaymentAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? ActualPaymentAmount { get; set; }
 
         /// <summary>

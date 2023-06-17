@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -70,7 +71,7 @@ namespace EU.Model
         /// <summary>
         /// 税率
         /// </summary>
-        [Display(Name = "TaxRate")]
+        [Display(Name = "TaxRate"), Column(TypeName = "decimal(20,6)")]
         public decimal? TaxRate { get; set; }
 
         /// <summary>

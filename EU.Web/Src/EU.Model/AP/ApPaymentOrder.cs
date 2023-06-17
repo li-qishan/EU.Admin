@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -55,13 +56,13 @@ namespace EU.Model
         /// <summary>
         /// 冲销金额
         /// </summary>
-        [Display(Name = "Amount")]
+        [Display(Name = "Amount"), Column(TypeName = "decimal(20,2)")]
         public decimal? Amount { get; set; }
 
         /// <summary>
         /// 实收金额
         /// </summary>
-        [Display(Name = "ActualAmount")]
+        [Display(Name = "ActualAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? ActualAmount { get; set; }
 
         /// <summary>

@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -38,7 +39,7 @@ namespace EU.Model
         /// <summary>
         /// 标准单价
         /// </summary>
-        [Display(Name = "Price")]
+        [Display(Name = "Price"), Column(TypeName = "decimal(20,2)")]
         public decimal? Price { get; set; }
 
         /// <summary>

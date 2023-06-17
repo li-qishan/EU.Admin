@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -49,25 +50,25 @@ namespace EU.Model
         /// <summary>
         /// 单位用量
         /// </summary>
-        [Display(Name = "Dosage")]
+        [Display(Name = "Dosage"), Column(TypeName = "decimal(20,8)")]
         public decimal Dosage { get; set; }
 
         /// <summary>
         /// 损耗率
         /// </summary>
-        [Display(Name = "WastageRate")]
+        [Display(Name = "WastageRate"), Column(TypeName = "decimal(20,2)")]
         public decimal WastageRate { get; set; }
 
         /// <summary>
         /// 应发数量
         /// </summary>
-        [Display(Name = "ShouldQTY")]
+        [Display(Name = "ShouldQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal ShouldQTY { get; set; }
 
         /// <summary>
         /// 实发数量
         /// </summary>
-        [Display(Name = "ActualQTY")]
+        [Display(Name = "ActualQTY"), Column(TypeName = "decimal(20,8)")]
         public decimal ActualQTY { get; set; }
 
         /// <summary>

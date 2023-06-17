@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -56,7 +57,7 @@ namespace EU.Model
         /// <summary>
         /// 单重
         /// </summary>
-        [Display(Name = "PieceWeight")]
+        [Display(Name = "PieceWeight"), Column(TypeName = "decimal(20,3)")]
         public decimal? PieceWeight { get; set; }
 
         /// <summary>
@@ -68,13 +69,13 @@ namespace EU.Model
         /// <summary>
         /// 调机时间（分钟）
         /// </summary>
-        [Display(Name = "SetupTime")]
+        [Display(Name = "SetupTime"), Column(TypeName = "decimal(20,2)")]
         public decimal? SetupTime { get; set; }
 
         /// <summary>
         /// 标准工时，保留两位小数
         /// </summary>
-        [Display(Name = "StandardHours")]
+        [Display(Name = "StandardHours"), Column(TypeName = "decimal(20,2)")]
         public decimal? StandardHours { get; set; }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace EU.Model
         /// <summary>
         /// 标准工价
         /// </summary>
-        [Display(Name = "StandardWages")]
+        [Display(Name = "StandardWages"), Column(TypeName = "decimal(20,2)")]
         public decimal? StandardWages { get; set; }
 
         /// <summary>

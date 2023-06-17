@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -49,19 +50,19 @@ namespace EU.Model
         /// <summary>
         /// 应收金额
         /// </summary>
-        [Display(Name = "ReceivableAmount")]
+        [Display(Name = "ReceivableAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? ReceivableAmount { get; set; }
 
         /// <summary>
         /// 实收金额
         /// </summary>
-        [Display(Name = "ActualAmount")]
+        [Display(Name = "ActualAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? ActualAmount { get; set; }
 
         /// <summary>
         /// 收款差额
         /// </summary>
-        [Display(Name = "DiffAmount")]
+        [Display(Name = "DiffAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? DiffAmount { get; set; }
     }
 }

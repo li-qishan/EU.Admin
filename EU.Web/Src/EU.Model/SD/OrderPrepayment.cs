@@ -17,6 +17,7 @@
 using EU.Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EU.Model
 {
@@ -43,13 +44,13 @@ namespace EU.Model
         /// <summary>
         /// 预付比例
         /// </summary>
-        [Display(Name = "Percent")]
+        [Display(Name = "Percent"), Column(TypeName = "decimal(20,2)")]
         public decimal? Percent { get; set; }
 
         /// <summary>
         /// 预付金额
         /// </summary>
-        [Display(Name = "Amount")]
+        [Display(Name = "Amount"), Column(TypeName = "decimal(20,2)")]
         public decimal? Amount { get; set; }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace EU.Model
         /// <summary>
         /// 已付金额
         /// </summary>
-        [Display(Name = "HasAmount")]
+        [Display(Name = "HasAmount"), Column(TypeName = "decimal(20,2)")]
         public decimal? HasAmount { get; set; }
 
         /// <summary>

@@ -16,12 +16,15 @@
 */
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using EU.Entity;
 
 namespace EU.Model
 {
     /// <summary>
     /// 客户
     /// </summary>
+    [Entity(TableCnName = "客户", TableName = "BdCustomer")]
     public class Customer : Base.PersistPoco
     {
         /// <summary>
@@ -63,7 +66,7 @@ namespace EU.Model
         /// <summary>
         /// 税率
         /// </summary>
-        [Display(Name = "税率")]
+        [Display(Name = "税率"), Column(TypeName = "decimal(20,6)")]
         public decimal? TaxRate { get; set; }
 
         /// <summary>
@@ -87,7 +90,7 @@ namespace EU.Model
         /// <summary>
         /// 信用额度
         /// </summary>
-        [Display(Name = "信用额度")]
+        [Display(Name = "信用额度"), Column(TypeName = "decimal(20,2)")]
         public decimal? CreditLine { get; set; }
 
         /// <summary>
