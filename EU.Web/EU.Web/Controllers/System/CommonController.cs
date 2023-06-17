@@ -60,7 +60,8 @@ namespace EU.Web.Controllers.System
             string sql = @"SELECT A.name AS table_name,
                                        B.name AS column_name,
                                        D.data_type,
-                                       C.value AS column_description
+                                       C.value AS column_description,
+                                       D.NUMERIC_PRECISION, D.NUMERIC_SCALE
                                 FROM sys.tables A
                                      INNER JOIN sys.columns B ON B.object_id = A.object_id
                                      LEFT JOIN sys.extended_properties C
@@ -101,6 +102,7 @@ namespace EU.Web.Controllers.System
             build.Append("using System;<br/>");
             build.Append("using System.ComponentModel;<br/>");
             build.Append("using System.ComponentModel.DataAnnotations;<br/>");
+            build.Append("using System.ComponentModel.DataAnnotations.Schema;<br/>");
             build.Append("<br/>");
             build.Append("namespace EU.Model<br/>");
             build.Append("{<br/>");
@@ -119,6 +121,8 @@ namespace EU.Web.Controllers.System
             string columnCode = string.Empty;
             string dataType = string.Empty;
             string column_description = string.Empty;
+            string NUMERIC_PRECISION = string.Empty;
+            string NUMERIC_SCALE = string.Empty;
 
             string[] a = {
                         "ID", "CreatedBy", "CreatedTime", "UpdateBy", "UpdateTime", "ImportDataId", "ModificationNum",
@@ -131,6 +135,8 @@ namespace EU.Web.Controllers.System
                 columnCode = dtColumn.Rows[i]["column_name"].ToString();
                 dataType = dtColumn.Rows[i]["data_type"].ToString();
                 column_description = dtColumn.Rows[i]["column_description"].ToString();
+                NUMERIC_PRECISION = dtColumn.Rows[i]["NUMERIC_PRECISION"].ToString();
+                NUMERIC_SCALE = dtColumn.Rows[i]["NUMERIC_SCALE"].ToString();
 
                 if (a.Contains(columnCode))
                     continue;
@@ -139,7 +145,9 @@ namespace EU.Web.Controllers.System
                 build.Append("/// &lt;summary&gt;<br/>");
                 build.Append("/// " + column_description + "<br/>");
                 build.Append("/// &lt;/summary&gt;<br/>");
-                build.Append("[Display(Name = \"" + columnCode + "\"), Description(\"" + column_description + "\")]<br/>");
+                if (dataType == "decimal")
+                    build.Append($"[Display(Name = \"" + columnCode + "\"), Description(\"" + column_description + "\"), Column(TypeName = \"decimal("+ NUMERIC_PRECISION + ","+ NUMERIC_SCALE + ")\")]<br/>");
+                else build.Append("[Display(Name = \"" + columnCode + "\"), Description(\"" + column_description + "\")]<br/>");
 
                 switch (dataType)
                 {
