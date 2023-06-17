@@ -168,9 +168,9 @@ namespace EU.Web.Controllers
                 if (ent.CreatedTime == null)
                     ent.CreatedTime = Utility.GetSysDate();
                 if (ent.GroupId == null)
-                    ent.GroupId = Guid.Parse(GetGroupId());
+                    ent.GroupId = GroupId;
                 if (ent.CompanyId == null)
-                    ent.CompanyId = Guid.Parse(GetCompanyId());
+                    ent.CompanyId = CompanyId;
                 ent.ModificationNum = 0;
                 ent.Tag = 0;
                 ent.IsActive = true;
@@ -421,25 +421,6 @@ namespace EU.Web.Controllers
             obj.message = message;
             return Ok(obj);
         }
-        /// <summary>
-        /// 根据Id查询数据
-        /// </summary>
-        /// <param name="Id">id</param>
-        /// <returns></returns>
-        [HttpGet]
-        public virtual async Task<IActionResult> GetById(Guid Id)
-        {
-            try
-            {
-                var value = await _BaseCrud.GetByIdAsync(Id);
-
-                return Ok(value);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         /// <summary>
         /// 根据Id查询数据
@@ -468,32 +449,24 @@ namespace EU.Web.Controllers
         /// <param name="Model"></param>
         /// <returns></returns>
         [HttpPost]
-        public virtual IActionResult Add(T Model)
+        public virtual async Task<ServiceResult<string>> Add(T Model)
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
 
                 DoAddPrepare(Model);
-                _BaseCrud.DoAdd(Model);
+                await _BaseCrud.DoAddAsync(Model);
 
-                obj.Id = Model.GetType().GetProperties().Where(x => x.Name.ToLower() == "id").FirstOrDefault()
+                var Id = Model.GetType().GetProperties().Where(x => x.Name.ToLower() == "id").FirstOrDefault()
                     ?.GetValue(Model).ToString();
 
-                status = "ok";
-                message = "添加成功！";
-            }
-            catch (Exception E)
-            {
-                message = E.Message;
-            }
+                return ServiceResult<string>.OprateSuccess(Id, ResponseText.INSERT_SUCCESS);
 
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -502,13 +475,8 @@ namespace EU.Web.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public virtual IActionResult BatchAdd(List<T> data)
+        public virtual async Task<ServiceResult> BatchAdd(List<T> data)
         {
-
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
                 data?.ForEach(o =>
@@ -520,20 +488,16 @@ namespace EU.Web.Controllers
                         ent.ID = Guid.NewGuid();
                     }
                 });
-                _context.AddRange(data);
-                _context.SaveChanges();
+                await _context.AddRangeAsync(data);
+                await _context.SaveChangesAsync();
 
-                status = "ok";
-                message = "添加成功！";
+                return ServiceResult.OprateSuccess(ResponseText.INSERT_SUCCESS);
+
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
         }
 
         /// <summary>
@@ -542,30 +506,19 @@ namespace EU.Web.Controllers
         /// <param name="modelModify">data</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual IActionResult Update(dynamic modelModify)
+        public virtual async Task<ServiceResult> Update(dynamic modelModify)
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
 
             try
             {
                 Update<T>(modelModify);
-                _context.SaveChanges();
-                //DoEditPrepare(Model);
-                //_BaseCrud.DoUpdate(Model);
-
-                status = "ok";
-                message = "修改成功！";
+                await _context.SaveChangesAsync();
+                return ServiceResult.OprateSuccess(ResponseText.UPDATE_SUCCESS);
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
 
         }
 
@@ -576,27 +529,17 @@ namespace EU.Web.Controllers
         /// <param name="Id">id</param>
         /// <returns></returns>
         [HttpGet]
-        public virtual IActionResult Delete(Guid Id)
+        public virtual async Task<ServiceResult> Delete(Guid Id)
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
-                _BaseCrud.DoDelete(Id);
-
-                status = "ok";
-                message = "删除成功！";
+                await _BaseCrud.DoDeleteAsync(Id);
+                return ServiceResult.OprateSuccess(ResponseText.DELETE_SUCCESS);
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
         }
 
         /// <summary>
@@ -605,12 +548,8 @@ namespace EU.Web.Controllers
         /// <param name="entryList">list</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual IActionResult BatchDelete(List<T> entryList)
+        public virtual async Task<ServiceResult> BatchDelete(List<T> entryList)
         {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-
             try
             {
                 for (int i = 0; i < entryList.Count; i++)
@@ -635,19 +574,14 @@ namespace EU.Web.Controllers
 
                     _context.Update(entryList[i]);
                 }
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                status = "ok";
-                message = "批量删除成功！";
+                return ServiceResult.OprateSuccess(ResponseText.DELETE_SUCCESS);
             }
-            catch (Exception E)
+            catch (Exception)
             {
-                message = E.Message;
+                throw;
             }
-
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
         }
         #endregion
 
@@ -661,7 +595,6 @@ namespace EU.Web.Controllers
         [HttpPost]
         public async Task<ServiceResult> SubmitAudit(Guid moduleId, List<T> entryList)
         {
-            dynamic obj = new ExpandoObject();
             string message = string.Empty;
 
             try
@@ -1332,167 +1265,6 @@ namespace EU.Web.Controllers
         /// <param name="parentId"></param>
         /// <returns></returns>
         [HttpGet]
-        public virtual IActionResult GetGridList(string paramData, string moduleCode, string sorter = "{}", string filter = "{}", string parentColumn = null, string parentId = null)
-        {
-            dynamic obj = new ExpandoObject();
-            string status = "error";
-            string message = string.Empty;
-            int current = 1;
-            int pageSize = 20;
-            int total = 0;
-
-            //try
-            //{
-            var searchParam = JsonConvert.DeserializeObject<Dictionary<string, object>>(paramData);
-            var filterParam = JsonConvert.DeserializeObject<Dictionary<string, object>>(filter);
-            var sorterParam = JsonConvert.DeserializeObject<Dictionary<string, string>>(sorter);
-
-            string queryCodition = "1=1";
-            string keyWord = string.Empty;
-
-            #region 处理查询条件
-            ModuleSqlColumn moduleColumnInfo = new ModuleSqlColumn(moduleCode);
-            List<SmModuleColumn> moduleColumns = moduleColumnInfo.GetModuleSqlColumn();
-
-            foreach (var item in searchParam)
-            {
-                if (item.Key == "current")
-                {
-                    current = int.Parse(item.Value.ToString());
-                    continue;
-                }
-                else if (item.Key == "pageSize")
-                {
-                    pageSize = int.Parse(item.Value.ToString());
-                    continue;
-                }
-                else if (item.Key == "_timestamp")
-                {
-                    continue;
-                }
-                else if (item.Key == "keyWord")
-                {
-                    keyWord = item.Value.ToString();
-                    continue;
-                }
-                else if (!string.IsNullOrEmpty(item.Value.ToString()))
-                {
-                    if (moduleColumns.Any())
-                    {
-                        var column = moduleColumns.Where(a => a.dataIndex == item.Key).FirstOrDefault();
-                        if (column != null)
-                            queryCodition += " AND " + column.TableAlias + "." + item.Key + " like '%" + item.Value.ToString() + "%'";
-                    }
-                    else
-                        queryCodition += " AND A." + item.Key + " like '%" + item.Value.ToString() + "%'";
-                }
-                //if (string.IsNullOrEmpty(item.Value.ToString()))
-                //    queryCodition += " AND A." + item.Key + " =''";
-                //else
-                //    queryCodition += " AND A." + item.Key + " like '%" + item.Value.ToString() + "%'";
-            }
-            if (!string.IsNullOrEmpty(parentId) && !string.IsNullOrEmpty(parentColumn))
-                queryCodition += " AND A." + parentColumn + " = '" + parentId + "'";
-            #endregion
-
-            #region 处理过滤条件
-            foreach (var item in filterParam)
-            {
-                if (!string.IsNullOrEmpty(item.Value.ToString()))
-                    queryCodition += " AND A." + item.Key + " = '" + item.Value.ToString() + "'";
-            }
-            #endregion
-
-            #region 处理关键字搜索
-            string keyWordCondition = string.Empty;
-            if (!string.IsNullOrEmpty(keyWord) && moduleColumns.Any())
-                moduleColumns.ForEach(item =>
-                {
-                    if (item.valueType == null && item.hideInSearch == false)
-                    {
-                        string TableAlias = item.TableAlias;
-                        string dataIndex = item.dataIndex;
-                        if (string.IsNullOrEmpty(keyWordCondition))
-                            keyWordCondition = TableAlias + "." + dataIndex + " LIKE '%" + keyWord + "%'";
-                        else
-                            keyWordCondition += " OR " + TableAlias + "." + dataIndex + " LIKE '%" + keyWord + "%'";
-                    }
-                });
-            #endregion
-
-            string userId = string.Empty;
-            ModuleSql moduleSql = new ModuleSql(moduleCode);
-            GridList grid = new GridList();
-            string tableName = moduleSql.GetTableName();
-            string SqlSelectBrwAndTable = moduleSql.GetSqlSelectBrwAndTable();
-            string SqlSelectAndTable = moduleSql.GetSqlSelectAndTable();
-            if (!string.IsNullOrEmpty(tableName))
-            {
-                SqlSelectBrwAndTable = string.Format(SqlSelectBrwAndTable, tableName);
-                SqlSelectAndTable = string.Format(SqlSelectAndTable, tableName);
-            }
-            string SqlDefaultCondition = moduleSql.GetSqlDefaultCondition();
-
-            #region 处理关键字搜索
-            if (!string.IsNullOrEmpty(keyWordCondition))
-                SqlDefaultCondition += " AND (" + keyWordCondition + ")";
-            #endregion
-
-            //SqlDefaultCondition = SqlDefaultCondition.Replace("[UserId]", userId);
-            string DefaultSortField = moduleSql.GetDefaultSortField();
-            string DefaultSortDirection = moduleSql.GetDefaultSortDirection();
-            if (string.IsNullOrEmpty(DefaultSortDirection))
-            {
-                DefaultSortDirection = "ASC";
-            }
-            grid.SqlSelect = SqlSelectBrwAndTable;
-            grid.SqlDefaultCondition = SqlDefaultCondition;
-            grid.SqlQueryCondition = queryCodition;
-            grid.SortField = DefaultSortField;
-            grid.SortDirection = DefaultSortDirection;
-
-            #region 处理排序
-            if (sorterParam.Count > 0)
-                foreach (var item in sorterParam)
-                {
-                    grid.SortField = item.Key;
-                    if (item.Value == "ascend")
-                        grid.SortDirection = "ASC";
-                    else if (item.Value == "descend")
-                        grid.SortDirection = "DESC";
-                }
-            #endregion
-
-            grid.PageSize = pageSize;
-            grid.CurrentPage = current;
-            grid.ModuleCode = moduleCode;
-            total = grid.GetTotalCount();
-            string sql = grid.GetQueryString();
-            DataTable dtTemp = DBHelper.Instance.GetDataTable(sql);
-            DataTable dt = Utility.FormatDataTableForTree(moduleCode, userId, dtTemp);
-            obj.data = dt;
-            status = "ok";
-            message = "查询成功！";
-
-            obj.current = current;
-            obj.pageSize = pageSize;
-            obj.total = total;
-            obj.status = status;
-            obj.message = message;
-            return Ok(obj);
-        }
-
-        /// <summary>
-        /// 自定义列模块数据返回
-        /// </summary>
-        /// <param name="paramData"></param>
-        /// <param name="moduleCode"></param>
-        /// <param name="sorter"></param>
-        /// <param name="filter"></param>
-        /// <param name="parentColumn"></param>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
-        [HttpGet]
         public virtual ServiceResult<DataTable> GetPageData(string paramData, string moduleCode, [FromFilter] QueryFilter filter, string sorter = "{}", string parentColumn = null, string parentId = null)
         {
             int current = 1;
@@ -1632,42 +1404,6 @@ namespace EU.Web.Controllers
             return ServiceResult<DataTable>.OprateSuccess(dt, total, ResponseText.QUERY_SUCCESS);
         }
 
-        #endregion
-
-        #region 获得当前公司ID
-        /// <summary>
-        /// 获得当前公司ID
-        /// </summary>
-        /// <returns></returns>
-        public static string GetCompanyId()
-        {
-            try
-            {
-                return Utility.GetCompanyId();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        #endregion
-
-        #region 获得当前集团ID
-        /// <summary>
-        /// 获得当前集团ID
-        /// </summary>
-        /// <returns></returns>
-        public static string GetGroupId()
-        {
-            try
-            {
-                return Utility.GetGroupId();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
         #endregion
     }
 }
