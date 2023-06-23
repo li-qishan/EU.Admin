@@ -1,0 +1,149 @@
+﻿using System;
+using System.Linq;
+using AutoMapper;
+using JianLian.HDIS.Shared;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using JianLian.HDIS.Utility.Entry;
+using JianLian.HDIS.EntityFrameworkCore;
+using JianLian.HDIS.Domain.Model.@Prefix;
+using JianLian.HDIS.Application.Interface.@Prefix;
+using JianLian.HDIS.Application.Contracts.Edit.@Prefix;
+using JianLian.HDIS.Application.Contracts.Insert.@Prefix;
+using JianLian.HDIS.Application.Contracts.View.@Prefix;
+
+namespace JianLian.HDIS.Application.Service.@Prefix
+{
+    /// <summary>
+    /// @TableDesc (服务)
+    /// </summary>
+    public class @TableNameService : BaseService<@TableName, @TableNameDto, Insert@TableNameInput, Edit@TableNameInput>, I@TableNameService
+    {
+        #region 初始化
+        /// <summary>
+        /// 初始化 (注入)
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guidGenerator"></param>
+        /// <param name="currentUser"></param>
+        /// <param name="mapper"></param>
+        public @TableNameService(HDISDbContext context, IGuidGenerator guidGenerator, ICurrentUser currentUser, IMapper mapper)
+            : base(context, guidGenerator, currentUser, mapper)
+        {
+
+        }
+        #endregion
+
+        #region 基础方法
+        #region 查询
+        /// <summary>
+        /// 字典映射、全称、单位转换等
+        /// </summary>
+        /// <param name="view"></param>
+        private void SetLabel(@TableNameDto view)
+        {
+            if (view != null)
+            {
+@SetLabel
+            }
+        }
+        /// <summary>
+        /// @TableDesc - 根据id查询
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult<@TableNameDto>> GetAsync(Guid id)
+        {
+            var result = await base.GetAsync(id);
+            if (result.Success)
+                SetLabel(result.Data);
+            return result;
+        }
+
+        /// <summary>
+        /// @TableDesc - 根据条件查询
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult<IEnumerable<@TableNameDto>>> GetListAsync(QueryFilter filter)
+        {
+            var result = await base.GetListAsync(filter);
+            result.Data?.ToList().ForEach(view =>
+            {
+                SetLabel(view);
+            });
+            return result;
+        }
+        #endregion
+
+        #region 新增
+        /// <summary>
+        /// @TableDesc - 新增
+        /// </summary>
+        /// <param name="insertModel"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult<string>> InsertAsync(Insert@TableNameInput insertModel)
+        {
+            // custom action
+
+            return await base.InsertAsync(insertModel);
+        }
+        /// <summary>
+        /// @TableDesc - 批量新增
+        /// </summary>
+        /// <param name="insertModels"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult> BulkInsertAsync(IEnumerable<Insert@TableNameInput> insertModels)
+        {
+            // custom action
+
+            return await base.BulkInsertAsync(insertModels);
+        }
+        #endregion
+
+        #region 更新
+        /// <summary>
+        /// @TableDesc - 更新
+        /// </summary> 
+        /// <param name="id"></param>
+        /// <param name="editModel"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult> UpdateAsync(Guid id, Edit@TableNameInput editModel)
+        {
+            // custom action
+
+            return await base.UpdateAsync(id, editModel);
+        }
+
+        /// <summary>
+        /// @TableDesc - 批量更新
+        /// </summary>
+        /// <param name="editModels"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult> BulkUpdateAsync(Dictionary<Guid, Edit@TableNameInput> editModels)
+        {
+            // custom action
+
+            return await base.BulkUpdateAsync(editModels);
+        }
+        #endregion
+
+        #region 删除
+        /// <summary>
+        /// @TableDesc - 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override async Task<ServiceResult> DeleteAsync(Guid id)
+        {
+            // custom action
+
+            return await base.DeleteAsync(id);
+        }
+        #endregion
+        #endregion
+
+        #region 自定义方法
+        #endregion
+    }
+}

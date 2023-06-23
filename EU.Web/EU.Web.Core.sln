@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EU.Web.BackgroundJobs", "Sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EU.TaskHelper", "Src\EU.Task\EU.TaskHelper.csproj", "{A5558251-79B9-4DDB-A59E-ACF047833905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EU.EventBus", "Src\EU.EventBus\EU.EventBus.csproj", "{22F68748-7D7A-4403-90E1-2DCFFB8B9D1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EU.EventBus", "Src\EU.EventBus\EU.EventBus.csproj", "{22F68748-7D7A-4403-90E1-2DCFFB8B9D1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EU.CodeGenerator", "Src\EU.CodeGenerator\EU.CodeGenerator.csproj", "{798339BD-A832-4A80-876C-E2DAEF55FADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,12 +73,17 @@ Global
 		{22F68748-7D7A-4403-90E1-2DCFFB8B9D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F68748-7D7A-4403-90E1-2DCFFB8B9D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F68748-7D7A-4403-90E1-2DCFFB8B9D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{798339BD-A832-4A80-876C-E2DAEF55FADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{798339BD-A832-4A80-876C-E2DAEF55FADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{798339BD-A832-4A80-876C-E2DAEF55FADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{798339BD-A832-4A80-876C-E2DAEF55FADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{27648B22-ECC7-4B2F-BB85-A86C03B6ED05} = {6A061D9C-B4F7-481E-A12E-DA5C04F6713E}
+		{798339BD-A832-4A80-876C-E2DAEF55FADA} = {6A061D9C-B4F7-481E-A12E-DA5C04F6713E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {29A3DA80-3552-48F2-87B3-F7F478BF8AA9}
