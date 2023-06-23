@@ -14,13 +14,13 @@ using EU.TaskHelper;
 using EU.Core.Const;
 using System.Linq;
 
-namespace EU.Web.Controllers.@Prefix
+namespace EU.Web.Controllers.SM
 {
     [GlobalActionFilter, ApiExplorerSettings(GroupName = Grouping.Base)]
-    public class @TableNameBaseController : BaseController<@TableNameBase>
+    public class SmApiLogController : BaseController<SmApiLog>
     {
 
-        public @TableNameBaseController(DataContext _context, IBaseCRUDVM<@TableNameBase> BaseCrud) : base(_context, BaseCrud)
+        public SmApiLogController(DataContext _context, IBaseCRUDVM<SmApiLog> BaseCrud) : base(_context, BaseCrud)
         {
         }
 
@@ -56,7 +56,7 @@ namespace EU.Web.Controllers.@Prefix
 
             try
             {
-                Update<@TableNameBase>(modelModify);
+                Update<SmApiLog>(modelModify);
                 await _context.SaveChangesAsync();
                 return ServiceResult.OprateSuccess(ResponseText.UPDATE_SUCCESS);
             }

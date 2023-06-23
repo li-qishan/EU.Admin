@@ -8,7 +8,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        EU.CodeGenerator.Utilities.BasePath = Environment.CurrentDirectory.Replace(@"EU.CodeGenerator\bin\Debug\net7.0", "");
+        EU.CodeGenerator.Utilities.BasePath = Environment.CurrentDirectory.Replace(@"Src\EU.CodeGenerator\bin\Debug\net7.0", "");
 
         var container = new ServiceCollection();
         var Configuration = new ConfigurationBuilder()
@@ -23,6 +23,7 @@ class Program
 
         //Console.WriteLine($"FileName：{FileName}");
         ModelGenerator.Generator(table);
+        ControllerGenerator.Generator(table);
         // ALL Completed
         Console.WriteLine("ALL Completed!");
         Console.ReadKey();

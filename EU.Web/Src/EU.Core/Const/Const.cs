@@ -37,6 +37,11 @@ namespace EU.Core.Const
             public const string System = "system";
 
             /// <summary>
+            /// 系统
+            /// </summary>
+            public const string SM = "system";
+
+            /// <summary>
             /// 认证授权
             /// </summary>
             public const string Auth = "auth";

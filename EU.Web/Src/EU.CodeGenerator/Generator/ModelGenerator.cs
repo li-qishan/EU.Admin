@@ -26,7 +26,7 @@ namespace JianLian.HDIS.CodeGenerator
         public static void Generator(string tableName)
         {
             string _tmpl = File.ReadAllText("..\\..\\..\\Tmpl\\ModelTmpl.txt");
-            string path = $"{Utilities.BasePath}EU.Model\\{Utilities.FileName}\\";
+            string path = $"{Utilities.BasePath}Src\\EU.Model\\{Utilities.FileName}\\";
             _tmpl = _tmpl.Replace("@TableNameBase", tableName);
             _tmpl = _tmpl.Replace("@CurrentTime", DateTime.Now.ToString());
             _tmpl = _tmpl.Replace("@CurrentTimeYear", DateTime.Now.Year.ToString());
