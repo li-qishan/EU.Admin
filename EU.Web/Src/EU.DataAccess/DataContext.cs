@@ -647,6 +647,10 @@ namespace EU.DataAccess
 
         #endregion
 
+        public virtual DbSet<SmApiLog> SmApiLog { get; set; }
+
+//占位符
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

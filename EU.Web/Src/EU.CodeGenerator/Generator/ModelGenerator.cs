@@ -174,6 +174,19 @@ namespace JianLian.HDIS.CodeGenerator
             _tmpl = _tmpl.Replace("@Colunms", build.ToString());
             Utilities.CreateFile($"{path}\\{tableName}.cs", _tmpl, true);
 
+            path = $"{Utilities.BasePath}Src\\EU.DataAccess\\DataContext.cs";
+            _tmpl = File.ReadAllText($"{Utilities.BasePath}Src\\EU.DataAccess\\DataContext.cs");
+            var index = _tmpl.IndexOf("//Õ¼Î»·û");
+            build = new StringBuilder();
+            //build.AppendLine();
+            build.AppendLine("        public virtual DbSet<@TableName> @TableName { get; set; }");
+            build.AppendLine();
+            if (_tmpl.IndexOf(tableName) < 0)
+            {
+                _tmpl = _tmpl.Insert(index, build.ToString());
+                _tmpl = _tmpl.Replace("@TableName", tableName);
+            }
+            Utilities.CreateFile(path, _tmpl, true);
             Console.WriteLine("ModelGenerator Completed!");
         }
 
